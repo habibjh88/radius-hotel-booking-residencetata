@@ -1,0 +1,344 @@
+<?xml version="1.0"?>
+<ruleset name="Radius Hotel Booking - Residence TATA">
+    <description>PHPCS ruleset for WordPress.org plugin repository submission</description>
+
+    <!-- Arguments -->
+    <arg name="colors" />
+    <arg value="ps" />
+    <arg name="basepath" value="." />
+    <arg name="parallel" value="50" />
+    <arg name="extensions" value="php" />
+
+    <!-- Show sniff codes in all reports -->
+    <arg value="ns"/>
+
+    <!-- Scan these directories -->
+    <file>.</file>
+
+    <!-- Exclude patterns -->
+    <exclude-pattern>*/node_modules/*</exclude-pattern>
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/resources/stubs/*</exclude-pattern>
+    <exclude-pattern>*/build/*</exclude-pattern>
+    <exclude-pattern>*/tests/*</exclude-pattern>
+    <exclude-pattern>*.min.js</exclude-pattern>
+    <exclude-pattern>*.min.css</exclude-pattern>
+
+    <!-- PHP Compatibility - Ensure code works with PHP 8.0+ -->
+    <rule ref="PHPCompatibilityWP">
+        <include-pattern>*\.php$</include-pattern>
+    </rule>
+    <config name="testVersion" value="8.0-"/>
+
+    <!-- WordPress Coding Standards -->
+    <rule ref="WordPress">
+        <!-- Exclude some overly strict rules -->
+        <exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
+        <exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
+        <exclude name="Universal.ControlStructures.DisallowLonelyIf"/>
+
+    </rule>
+
+    <!-- ===================================== -->
+    <!-- CRITICAL: SECURITY RULES FOR WP.ORG  -->
+    <!-- ===================================== -->
+
+    <!-- Nonce Verification - CRITICAL for WordPress.org -->
+    <rule ref="WordPress.Security.NonceVerification">
+        <type>error</type>
+        <message>Processing form data without nonce verification is a security vulnerability</message>
+    </rule>
+
+    <!-- Data Validation - CRITICAL -->
+    <rule ref="WordPress.Security.ValidatedSanitizedInput">
+        <type>error</type>
+        <message>All input data must be validated and sanitized</message>
+    </rule>
+
+    <!-- Output Escaping - CRITICAL -->
+    <rule ref="WordPress.Security.EscapeOutput">
+        <type>error</type>
+        <message>All output must be escaped to prevent XSS vulnerabilities</message>
+    </rule>
+
+    <!-- SQL Prepared Statements - CRITICAL -->
+    <rule ref="WordPress.DB.PreparedSQL">
+        <type>error</type>
+        <message>Use $wpdb->prepare() for all database queries to prevent SQL injection</message>
+    </rule>
+
+    <rule ref="WordPress.DB.PreparedSQLPlaceholders">
+        <type>error</type>
+        <message>Incorrect placeholder usage in prepared SQL statements</message>
+    </rule>
+
+    <!-- Direct Database Query - WARNING -->
+    <rule ref="WordPress.DB.DirectDatabaseQuery">
+        <type>warning</type>
+        <message>Direct database queries should be avoided when possible. Use WP functions.</message>
+    </rule>
+
+
+    <!-- File System Operations Security -->
+    <rule ref="WordPress.WP.AlternativeFunctions">
+        <type>warning</type>
+        <message>Use WordPress file system functions instead of direct PHP file functions</message>
+    </rule>
+
+    <!-- Capability Checks -->
+    <rule ref="WordPress.WP.Capabilities">
+        <type>error</type>
+        <message>Use capability checks instead of role checks</message>
+    </rule>
+
+    <!-- Prevent Path Disclosure -->
+    <rule ref="WordPress.Security.PluginMenuSlug">
+        <type>error</type>
+    </rule>
+
+    <!-- Safe Redirects -->
+    <rule ref="WordPress.Security.SafeRedirect">
+        <type>error</type>
+        <message>Use wp_safe_redirect() for redirects to prevent open redirect vulnerabilities</message>
+    </rule>
+
+    <!-- ===================================== -->
+    <!-- CODE QUALITY RULES                    -->
+    <!-- ===================================== -->
+
+    <!-- No Development Functions -->
+    <rule ref="WordPress.PHP.DevelopmentFunctions">
+        <type>error</type>
+        <message>Development functions like var_dump(), print_r(), phpinfo() must be removed</message>
+        <!-- Allow error logging -->
+        <exclude name="WordPress.PHP.DevelopmentFunctions.error_log_error_log"/>
+        <exclude name="WordPress.PHP.DevelopmentFunctions.error_log_trigger_error"/>
+        <exclude name="WordPress.PHP.DevelopmentFunctions.error_log_set_error_handler"/>
+        <exclude name="WordPress.PHP.DevelopmentFunctions.prevent_path_disclosure_error_reporting"/>
+        <exclude name="WordPress.PHP.DevelopmentFunctions.error_log_debug_backtrace"/>
+        <exclude name="WordPress.PHP.DevelopmentFunctions.error_log_wp_debug_backtrace_summary"/>
+    </rule>
+
+    <!-- No Discouraged Functions -->
+    <rule ref="WordPress.PHP.DiscouragedPHPFunctions">
+        <type>warning</type>
+    </rule>
+
+    <!-- No eval() -->
+    <rule ref="Squiz.PHP.Eval">
+        <type>error</type>
+        <message>eval() is forbidden - potential security risk</message>
+    </rule>
+
+    <!-- ===================================== -->
+    <!-- INTERNATIONALIZATION (i18n)           -->
+    <!-- ===================================== -->
+
+    <rule ref="WordPress.WP.I18n">
+        <type>error</type>
+        <properties>
+            <!-- Set your text domain here -->
+            <property name="text_domain" type="array">
+                <element value="radius-hotel-booking-residencetata"/>
+            </property>
+        </properties>
+        <!-- Allow empty strings (for spaces, etc.) -->
+        <exclude name="WordPress.WP.I18n.NoEmptyStrings"/>
+    </rule>
+
+    <!-- ===================================== -->
+    <!-- WORDPRESS.ORG SPECIFIC REQUIREMENTS   -->
+    <!-- ===================================== -->
+
+    <!-- Enqueue Scripts/Styles Properly -->
+    <rule ref="WordPress.WP.EnqueuedResources">
+        <type>error</type>
+        <message>Scripts and styles must be enqueued properly using wp_enqueue_*() functions</message>
+    </rule>
+
+    <!-- No hardcoded scripts/styles -->
+    <rule ref="WordPress.WP.EnqueuedResourceParameters">
+        <type>warning</type>
+    </rule>
+
+    <!-- Post Type Registration -->
+    <rule ref="WordPress.WP.PostsPerPage">
+        <type>warning</type>
+    </rule>
+
+    <!-- Timezone Usage -->
+    <rule ref="WordPress.DateTime.RestrictedFunctions">
+        <type>warning</type>
+        <message>Use WordPress timezone functions instead of PHP functions</message>
+    </rule>
+
+    <rule ref="WordPress.DateTime.CurrentTimeTimestamp">
+        <type>warning</type>
+    </rule>
+
+    <!-- ===================================== -->
+    <!-- CODE ANALYSIS                         -->
+    <!-- ===================================== -->
+
+    <!-- Detect unused code -->
+    <rule ref="Generic.CodeAnalysis.EmptyStatement">
+        <type>warning</type>
+    </rule>
+
+    <rule ref="Generic.CodeAnalysis.UnconditionalIfStatement">
+        <type>error</type>
+    </rule>
+
+    <rule ref="Generic.CodeAnalysis.UnnecessaryFinalModifier">
+        <type>warning</type>
+    </rule>
+
+    <rule ref="Generic.CodeAnalysis.UselessOverridingMethod">
+        <type>warning</type>
+    </rule>
+
+    <!-- Valid PHP Syntax -->
+    <rule ref="Generic.PHP.Syntax">
+        <type>error</type>
+    </rule>
+
+    <!-- No deprecated WordPress functions -->
+    <rule ref="WordPress.WP.DeprecatedFunctions">
+        <type>error</type>
+        <message>Deprecated WordPress functions should not be used</message>
+    </rule>
+
+    <rule ref="WordPress.WP.DeprecatedClasses">
+        <type>error</type>
+    </rule>
+
+    <rule ref="WordPress.WP.DeprecatedParameters">
+        <type>error</type>
+    </rule>
+
+    <rule ref="WordPress.WP.DeprecatedParameterValues">
+        <type>error</type>
+    </rule>
+
+    <!-- ===================================== -->
+    <!-- DOCUMENTATION                         -->
+    <!-- ===================================== -->
+
+    <rule ref="WordPress-Docs">
+        <type>warning</type>
+        <exclude name="Squiz.Commenting.FileComment.MissingPackageTag"/>
+        <exclude name="Squiz.Commenting.FunctionComment.ParamCommentFullStop"/>
+        <exclude name="Squiz.Commenting.FunctionComment.ThrowsNoFullStop"/>
+        <exclude name="Squiz.Commenting.InlineComment.InvalidEndChar"/>
+        <exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamType"/>
+    </rule>
+
+    <!-- Require file headers -->
+    <rule ref="Squiz.Commenting.FileComment">
+        <type>warning</type>
+        <exclude name="Squiz.Commenting.FileComment.MissingPackageTag"/>
+    </rule>
+
+    <!-- ===================================== -->
+    <!-- BEST PRACTICES                        -->
+    <!-- ===================================== -->
+
+    <!-- Use Yoda Conditions -->
+    <rule ref="WordPress.PHP.YodaConditions">
+        <type>warning</type>
+    </rule>
+
+    <!-- Strict IN_ARRAY -->
+    <rule ref="WordPress.PHP.StrictInArray">
+        <type>warning</type>
+    </rule>
+
+    <!-- Discourage extract() -->
+    <rule ref="WordPress.PHP.DontExtract">
+        <type>error</type>
+        <message>extract() is discouraged for security and code clarity</message>
+    </rule>
+
+    <!-- No shorthand PHP tags -->
+    <rule ref="Generic.PHP.DisallowShortOpenTag">
+        <type>error</type>
+    </rule>
+
+    <rule ref="Generic.PHP.DisallowAlternativePHPTags">
+        <type>error</type>
+    </rule>
+
+    <!-- ===================================== -->
+    <!-- PERFORMANCE                           -->
+    <!-- ===================================== -->
+
+    <!-- No unnecessary string concatenation -->
+    <rule ref="Generic.Strings.UnnecessaryStringConcat">
+        <type>warning</type>
+        <properties>
+            <property name="allowMultiline" value="true"/>
+        </properties>
+    </rule>
+
+    <!-- ===================================== -->
+    <!-- NAMING CONVENTIONS                    -->
+    <!-- ===================================== -->
+
+    <!-- Hook names should be lowercase with underscores -->
+    <rule ref="WordPress.NamingConventions.ValidHookName">
+        <type>error</type>
+    </rule>
+
+    <!-- Variable naming (relaxed) -->
+    <rule ref="WordPress.NamingConventions.ValidVariableName">
+        <severity>3</severity>
+    </rule>
+
+    <!-- Function naming (relaxed) -->
+    <rule ref="WordPress.NamingConventions.ValidFunctionName">
+        <severity>3</severity>
+    </rule>
+
+    <!-- ===================================== -->
+    <!-- WORDPRESS.ORG REJECTION PREVENTERS    -->
+    <!-- ===================================== -->
+
+    <!-- No external resources without disclosure -->
+    <rule ref="WordPress.WP.CronInterval">
+        <type>warning</type>
+    </rule>
+
+    <!-- File modifications need proper checks -->
+    <rule ref="WordPress.WP.GlobalVariablesOverride">
+        <type>error</type>
+        <message>Do not override WordPress global variables</message>
+    </rule>
+
+    <!-- ===================================== -->
+    <!-- ADDITIONAL SECURITY HARDENING         -->
+    <!-- ===================================== -->
+
+    <!-- Check for proper ABSPATH constant usage -->
+    <rule ref="Generic.PHP.BacktickOperator">
+        <type>error</type>
+        <message>Backtick operator is not allowed</message>
+    </rule>
+
+    <!-- No goto statements -->
+    <rule ref="Generic.PHP.DiscourageGoto">
+        <type>error</type>
+    </rule>
+
+    <!-- ===================================== -->
+    <!-- TYPE COMPARISON (Manual Check)        -->
+    <!-- Note: Strict comparison checking is    -->
+    <!-- included in WordPress.PHP.StrictInArray -->
+    <!-- and general best practices             -->
+    <!-- ===================================== -->
+
+    <!-- Encourage type casting -->
+    <rule ref="WordPress.PHP.TypeCasts">
+        <type>warning</type>
+    </rule>
+
+</ruleset>

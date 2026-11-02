@@ -1,0 +1,1109 @@
+# Copyright (C) 2026 RadiusTheme
+# This file is distributed under the GPLv2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Radius Hotel Booking - Residence TATA 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/radius-hotel-booking-residencetata\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-11-02T07:01:41+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: radius-hotel-booking-residencetata\n"
+
+#. Plugin Name of the plugin
+#: radius-hotel-booking-residencetata.php
+msgid "Radius Hotel Booking - Residence TATA"
+msgstr ""
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+#: radius-hotel-booking-residencetata.php
+msgid "https://radiustheme.com"
+msgstr ""
+
+#. Description of the plugin
+#: radius-hotel-booking-residencetata.php
+msgid "Residence TATA's own features for Radius Hotel Booking (payroll and HR, the data migration, local settings). Built for this hotel only."
+msgstr ""
+
+#. Author of the plugin
+#: radius-hotel-booking-residencetata.php
+msgid "RadiusTheme"
+msgstr ""
+
+#: includes/Import/Entities/AbstractImporter.php:50
+msgid "Changed in the old system since it was linked; the linked record was not changed."
+msgstr ""
+
+#: includes/Import/Entities/AbstractImporter.php:64
+msgid "An existing record was linked, not changed."
+msgstr ""
+
+#: includes/Import/Entities/AccessSettingsImporter.php:41
+msgid "Access settings"
+msgstr ""
+
+#. translators: %s: legacy keys.
+#: includes/Import/Entities/AccessSettingsImporter.php:74
+#, php-format
+msgid "Not carried over (no matching permission): %s."
+msgstr ""
+
+#: includes/Import/Entities/AccessSettingsImporter.php:77
+msgid "The old fallback PIN is not 4 to 8 digits; it was not carried over. Set one under Settings → Passcodes."
+msgstr ""
+
+#: includes/Import/Entities/AccessSettingsImporter.php:109
+msgid "The Staff role's permissions are already set here; they were kept, not replaced."
+msgstr ""
+
+#: includes/Import/Entities/BookingImporter.php:81
+msgid "Bookings open at cutover"
+msgstr ""
+
+#: includes/Import/Entities/BookingImporter.php:156
+msgid "Changed in the old system since it was imported (status, room, dates, price or payment); apply the change to the booking by hand."
+msgstr ""
+
+#: includes/Import/Entities/BookingImporter.php:163
+msgid "A room was added to this order in the old system after it was imported; it is imported as a separate booking."
+msgstr ""
+
+#. translators: 1: legacy status, 2: order number, 3: booking reference.
+#: includes/Import/Entities/BookingImporter.php:240
+#, php-format
+msgid "Now \"%1$s\" in the old system (order #%2$d) since it was imported; apply it to booking %3$s by hand."
+msgstr ""
+
+#. translators: %s: booking reference.
+#: includes/Import/Entities/BookingImporter.php:242
+#, php-format
+msgid "Removed from the old system since it was imported; check booking %s by hand."
+msgstr ""
+
+#: includes/Import/Entities/BookingImporter.php:269
+msgid "Marked checked in although the stay has not started; imported as confirmed."
+msgstr ""
+
+#. translators: %d: number of stays.
+#: includes/Import/Entities/BookingImporter.php:292
+#, php-format
+msgid "%d stay that ended in the last 30 days is still \"checked in\" in the old system; it is not open and was not imported."
+msgid_plural "%d stays that ended in the last 30 days are still \"checked in\" in the old system; they are not open and were not imported."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: document type as stored.
+#: includes/Import/Entities/BookingImporter.php:390
+#, php-format
+msgid "The identity document type \"%s\" is unknown; the guest is created without the document."
+msgstr ""
+
+#: includes/Import/Entities/BookingImporter.php:418
+msgid "Not checked: its room or rate plan would be created by this dry run. Import the rooms and rates first, then dry-run the bookings."
+msgstr ""
+
+#: includes/Import/Entities/BookingImporter.php:421
+msgid "Its room was not imported."
+msgstr ""
+
+#: includes/Import/Entities/BookingImporter.php:421
+msgid "Its rate plan was not imported."
+msgstr ""
+
+#. translators: 1: legacy check-in, 2: legacy check-out, 3: rate plan name.
+#: includes/Import/Entities/BookingImporter.php:430
+#, php-format
+msgid "The stay %1$s → %2$s does not fit the window of %3$s."
+msgstr ""
+
+#. translators: 1: legacy payment method, 2: method used here.
+#: includes/Import/Entities/BookingImporter.php:452
+#, php-format
+msgid "Paid by \"%1$s\" in the old system, a method not set up here; recorded as \"%2$s\". Correct the payment if needed."
+msgstr ""
+
+#. translators: %d: order number.
+#: includes/Import/Entities/BookingImporter.php:464
+#, php-format
+msgid "Order #%d (old system)"
+msgstr ""
+
+#. translators: 1: order number, 2: date.
+#: includes/Import/Entities/BookingImporter.php:467
+#, php-format
+msgid "Imported from the old system: order #%1$d of %2$s."
+msgstr ""
+
+#. translators: 1: billed name, 2: guest on file, 3: guest reference.
+#: includes/Import/Entities/BookingImporter.php:503
+#, php-format
+msgid "Billed to %1$s, whose phone or e-mail is on file for %2$s (%3$s); booked under %2$s. Check the guest."
+msgstr ""
+
+#. translators: 1: billed name, 2: phone.
+#: includes/Import/Entities/BookingImporter.php:510
+#, php-format
+msgid "Billed to %1$s (%2$s)."
+msgstr ""
+
+#. translators: 1: room number, 2: room state.
+#: includes/Import/Entities/BookingImporter.php:533
+#, php-format
+msgid "Room %1$s is \"%2$s\" now; the booking was imported on it. Move the guest or reopen the room."
+msgstr ""
+
+#. translators: 1: the stay, 2: the reason.
+#: includes/Import/Entities/BookingImporter.php:616
+#, php-format
+msgid "The room is not free for %1$s: %2$s"
+msgstr ""
+
+#: includes/Import/Entities/EmployeeContractImporter.php:38
+msgid "Staff contracts"
+msgstr ""
+
+#: includes/Import/Entities/EmployeeContractImporter.php:66
+#: includes/Import/Entities/EmployeeDeductionImporter.php:81
+#: includes/Import/Entities/EmployeePayImporter.php:93
+#: includes/Import/Entities/TimeOffImporter.php:69
+msgid "Its staff member was not imported."
+msgstr ""
+
+#: includes/Import/Entities/EmployeeContractImporter.php:71
+msgid "The old contract has a document file; attach it to the staff file by hand."
+msgstr ""
+
+#. translators: %s: date.
+#: includes/Import/Entities/EmployeeContractImporter.php:86
+#, php-format
+msgid "The contract ended in the old system, which keeps no end date; %s (its last change) was used."
+msgstr ""
+
+#: includes/Import/Entities/EmployeeDeductionImporter.php:45
+msgid "Staff deductions and garnishments"
+msgstr ""
+
+#. translators: 1: garnishment name, 2: amount still owed, 3: original total.
+#: includes/Import/Entities/EmployeeDeductionImporter.php:94
+#, php-format
+msgid "%1$s was imported with the %2$s still owed (of %3$s); what was already taken stays in the pay history."
+msgstr ""
+
+#: includes/Import/Entities/EmployeeImporter.php:63
+msgid "Staff files"
+msgstr ""
+
+#. translators: %s: login.
+#: includes/Import/Entities/EmployeeImporter.php:114
+#, php-format
+msgid "Staff user %s has no first and last name."
+msgstr ""
+
+#. translators: %s: name.
+#: includes/Import/Entities/EmployeeImporter.php:118
+#, php-format
+msgid "%s has no phone number in the old system; add it to the staff file."
+msgstr ""
+
+#: includes/Import/Entities/EmployeeImporter.php:147
+#: includes/Import/Entities/EmployeeImporter.php:158
+#: includes/Import/Entities/GuestImporter.php:236
+#: includes/Import/Entities/GuestImporter.php:244
+#: includes/Import/Entities/GuestImporter.php:468
+msgid "Banned in the old system."
+msgstr ""
+
+#. translators: %s: login.
+#: includes/Import/Entities/EmployeeImporter.php:161
+#, php-format
+msgid "User %s already has a staff file; it was linked, not changed."
+msgstr ""
+
+#: includes/Import/Entities/EmployeePayImporter.php:52
+msgid "Staff pay"
+msgstr ""
+
+#: includes/Import/Entities/EmployeePayImporter.php:86
+msgid "A later contract of the same staff member; the old system only used the first one."
+msgstr ""
+
+#: includes/Import/Entities/EmployeePayImporter.php:103
+msgid "Its pay schedule was not imported; choose one on the Pay tab."
+msgstr ""
+
+#: includes/Import/Entities/EmployeePayImporter.php:104
+msgid "Its work shift was not imported; choose one on the Pay tab."
+msgstr ""
+
+#: includes/Import/Entities/EmployeePayImporter.php:107
+msgid "The salary period was missing or unknown; a monthly salary was assumed."
+msgstr ""
+
+#: includes/Import/Entities/EmployeePayImporter.php:129
+msgid "This staff member already has pay set up here; it was kept."
+msgstr ""
+
+#: includes/Import/Entities/FloorImporter.php:36
+msgid "Floors"
+msgstr ""
+
+#: includes/Import/Entities/FloorImporter.php:54
+msgid "Ground floor"
+msgstr ""
+
+#. translators: %d: floor number.
+#: includes/Import/Entities/FloorImporter.php:58
+#, php-format
+msgid "Floor %d"
+msgstr ""
+
+#. translators: %s: floor name.
+#: includes/Import/Entities/FloorImporter.php:96
+#, php-format
+msgid "A floor called %s already exists; it was linked."
+msgstr ""
+
+#: includes/Import/Entities/GuestImporter.php:88
+#: includes/Legacy/OrderMetaDisplay.php:51
+msgid "Guests"
+msgstr ""
+
+#. translators: %s: account username.
+#: includes/Import/Entities/GuestImporter.php:174
+#, php-format
+msgid "Not imported: the account %s never booked and has no name, phone or document (often a sign-up bot). Check it in the old system."
+msgstr ""
+
+#: includes/Import/Entities/GuestImporter.php:204
+#: includes/Import/Entities/GuestImporter.php:219
+msgid "e-mail"
+msgstr ""
+
+#: includes/Import/Entities/GuestImporter.php:204
+#: includes/Import/Entities/GuestImporter.php:219
+msgid "phone"
+msgstr ""
+
+#. translators: 1: legacy customer id, 2: what matched.
+#: includes/Import/Entities/GuestImporter.php:207
+#, php-format
+msgid "Same %2$s as legacy customer #%1$d; merged into that guest."
+msgstr ""
+
+#. translators: 1: legacy customer id, 2: what matched, 3: this customer's name, 4: the other name.
+#: includes/Import/Entities/GuestImporter.php:209
+#, php-format
+msgid "Same %2$s as legacy customer #%1$d but another name (%3$s, not %4$s); merged into that guest. Check they are the same person."
+msgstr ""
+
+#. translators: 1: guest reference, 2: what matched.
+#: includes/Import/Entities/GuestImporter.php:222
+#, php-format
+msgid "Same %2$s as guest %1$s already on file; linked, not changed."
+msgstr ""
+
+#. translators: 1: guest reference, 2: what matched, 3: this customer's name, 4: the guest's name.
+#: includes/Import/Entities/GuestImporter.php:224
+#, php-format
+msgid "Same %2$s as guest %1$s already on file but another name (%3$s, not %4$s); linked, not changed. Check they are the same person."
+msgstr ""
+
+#. translators: %d: number of guests.
+#: includes/Import/Entities/GuestImporter.php:268
+#, php-format
+msgid "%d guest used an e-mail address that several different people share in the old system; it is not kept."
+msgid_plural "%d guests used e-mail addresses that several different people share in the old system; they are not kept."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of guests.
+#: includes/Import/Entities/GuestImporter.php:279
+#, php-format
+msgid "%d guest had a placeholder e-mail in the old system; they are marked as having no e-mail."
+msgid_plural "%d guests had a placeholder e-mail in the old system; they are marked as having no e-mail."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: number of guests, 2: number of accounts.
+#: includes/Import/Entities/GuestImporter.php:388
+#, php-format
+msgid "%1$d guest will be linked to their WordPress account (%2$d given the Hotel Guest role)."
+msgid_plural "%1$d guests will be linked to their WordPress accounts (%2$d given the Hotel Guest role)."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: number of guests, 2: number of accounts.
+#: includes/Import/Entities/GuestImporter.php:390
+#, php-format
+msgid "%1$d guest was linked to their WordPress account (%2$d given the Hotel Guest role)."
+msgid_plural "%1$d guests were linked to their WordPress accounts (%2$d given the Hotel Guest role)."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of accounts.
+#: includes/Import/Entities/GuestImporter.php:402
+#, php-format
+msgid "%d account was not linked: its guest is linked to another account of the same person (a merged duplicate), or the account belongs to another guest."
+msgid_plural "%d accounts were not linked: their guest is linked to another account of the same person (a merged duplicate), or the account belongs to another guest."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/Import/Entities/GuestImporter.php:408
+msgid "The Hotel Guest role is missing: update Radius Hotel Booking and run the import again to give it to the linked accounts."
+msgstr ""
+
+#: includes/Import/Entities/GuestImporter.php:459
+msgid "Banned in the old system, but merged into a guest with another name; not banned here. Check by hand."
+msgstr ""
+
+#: includes/Import/Entities/GuestImporter.php:462
+msgid "Banned in the old system; the guest it was merged into is banned too."
+msgstr ""
+
+#: includes/Import/Entities/GuestImporter.php:518
+msgid "The customer has no name."
+msgstr ""
+
+#. translators: %s: phone number as stored.
+#: includes/Import/Entities/GuestImporter.php:522
+#, php-format
+msgid "The phone number \"%s\" cannot be read."
+msgstr ""
+
+#. translators: %s: e-mail as stored.
+#: includes/Import/Entities/GuestImporter.php:526
+#, php-format
+msgid "The e-mail \"%s\" is not valid."
+msgstr ""
+
+#: includes/Import/Entities/GuestImporter.php:529
+msgid "The customer has neither a phone number nor an e-mail."
+msgstr ""
+
+#: includes/Import/Entities/GuestNoteImporter.php:35
+msgid "Guest notes"
+msgstr ""
+
+#: includes/Import/Entities/GuestNoteImporter.php:62
+msgid "Its guest was not imported."
+msgstr ""
+
+#. translators: %s: date.
+#: includes/Import/Entities/GuestNoteImporter.php:67
+#, php-format
+msgid "(Old system, %s)"
+msgstr ""
+
+#: includes/Import/Entities/LegacyLogExport.php:42
+msgid "Old activity log (kept as a file)"
+msgstr ""
+
+#. translators: %d: number of rows.
+#: includes/Import/Entities/LegacyLogExport.php:86
+#, php-format
+msgid "%d old log entry will be kept as a CSV file."
+msgid_plural "%d old log entries will be kept as a CSV file."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: number of rows, 2: download link.
+#: includes/Import/Entities/LegacyLogExport.php:114
+#, php-format
+msgid "%1$d old log entry kept as a file; keep it with the cutover backup: %2$s"
+msgid_plural "%1$d old log entries kept as a file; keep it with the cutover backup: %2$s"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/Import/Entities/PayrollHistoryImporter.php:78
+msgid "Pay runs (history)"
+msgstr ""
+
+#. translators: 1: status, 2: pay date.
+#: includes/Import/Entities/PayrollHistoryImporter.php:111
+#, php-format
+msgid "A %1$s run (pay day %2$s) is not history yet; run that period again here."
+msgstr ""
+
+#: includes/Import/Entities/PayrollHistoryImporter.php:178
+msgid "Voided in the old system."
+msgstr ""
+
+#. translators: %d: legacy user id.
+#: includes/Import/Entities/PayrollHistoryImporter.php:222
+#, php-format
+msgid "A line of this run belongs to staff member #%d, who was not imported; the run was left out."
+msgstr ""
+
+#. translators: %s: pay type (Paid time off, Sick pay).
+#: includes/Import/Entities/PayrollHistoryImporter.php:283
+#, php-format
+msgid "%s over the yearly limit"
+msgstr ""
+
+#: includes/Import/Entities/PayrollHistoryImporter.php:299
+msgid "Vacation pay"
+msgstr ""
+
+#: includes/Import/Entities/PayrollHistoryImporter.php:510
+msgid "The yearly time-off and vacation balances are checked against the history on the real import, not in a dry run."
+msgstr ""
+
+#. translators: 1: balance name (legacy key), 2: employee, 3: old value, 4: value from the imported runs.
+#: includes/Import/Entities/PayrollHistoryImporter.php:538
+#, php-format
+msgid "%1$s of %2$s: %3$s in the old system, %4$s from the imported pay runs. Balances are derived here; check the history."
+msgstr ""
+
+#: includes/Import/Entities/PayScheduleImporter.php:37
+msgid "Pay schedules"
+msgstr ""
+
+#: includes/Import/Entities/PayScheduleImporter.php:78
+msgid "A pay schedule with this name already exists; it was linked, not changed."
+msgstr ""
+
+#: includes/Import/Entities/ProDataReport.php:36
+msgid "Pricing rules, blocks and calendar sync (report only)"
+msgstr ""
+
+#. translators: %d: number of records.
+#: includes/Import/Entities/ProDataReport.php:60
+#, php-format
+msgid "%d seasonal pricing template was not imported: recreate it under Pricing rules."
+msgid_plural "%d seasonal pricing templates were not imported: recreate them under Pricing rules."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of records.
+#: includes/Import/Entities/ProDataReport.php:70
+#, php-format
+msgid "%d seasonal pricing rule still to come was not imported: recreate it under Pricing rules."
+msgid_plural "%d seasonal pricing rules still to come were not imported: recreate them under Pricing rules."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of records.
+#: includes/Import/Entities/ProDataReport.php:80
+#, php-format
+msgid "%d occupancy pricing rule was not imported: recreate it under Pricing rules."
+msgid_plural "%d occupancy pricing rules were not imported: recreate them under Pricing rules."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of records.
+#: includes/Import/Entities/ProDataReport.php:90
+#, php-format
+msgid "%d early-bird or last-minute rule was not imported: recreate it under Pricing rules."
+msgid_plural "%d early-bird or last-minute rules were not imported: recreate them under Pricing rules."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of records.
+#: includes/Import/Entities/ProDataReport.php:100
+#, php-format
+msgid "%d blocked period still to come was not imported: block it under Blocked dates."
+msgid_plural "%d blocked periods still to come were not imported: block them under Blocked dates."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of room types.
+#: includes/Import/Entities/ProDataReport.php:110
+#, php-format
+msgid "%d room type syncs a calendar (iCal) in the old system: add the feed under Calendar sync."
+msgid_plural "%d room types sync a calendar (iCal) in the old system: add the feeds under Calendar sync."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/Import/Entities/RateCalendarImporter.php:40
+msgid "Prices and closures by date"
+msgstr ""
+
+#: includes/Import/Entities/RateCalendarImporter.php:92
+#: includes/Import/Entities/RoomTypeRateImporter.php:91
+msgid "Its room type or rate plan was not imported."
+msgstr ""
+
+#: includes/Import/Entities/RatePlanImporter.php:44
+msgid "Rate plans"
+msgstr ""
+
+#. translators: %s: comma-separated rate plan names.
+#: includes/Import/Entities/RatePlanImporter.php:96
+#, php-format
+msgid "Several rate plans already have this window (%s); link it by hand."
+msgstr ""
+
+#. translators: %s: rate plan name.
+#: includes/Import/Entities/RatePlanImporter.php:116
+#, php-format
+msgid "A rate plan with the same window already exists; %s was merged into it."
+msgstr ""
+
+#: includes/Import/Entities/RatePlanImporter.php:144
+msgid "The old flexible plan has no stay length or check-in hours: it was set to 24 hours, check-in any time. Check it under Rate plans."
+msgstr ""
+
+#. translators: %s: plan name.
+#: includes/Import/Entities/RatePlanImporter.php:158
+#, php-format
+msgid "%s has no valid check-in and check-out times."
+msgstr ""
+
+#: includes/Import/Entities/RoomImporter.php:45
+#: includes/Import/LegacyImporter.php:199
+msgid "Rooms"
+msgstr ""
+
+#: includes/Import/Entities/RoomImporter.php:93
+msgid "The room has no number."
+msgstr ""
+
+#. translators: %s: room number.
+#: includes/Import/Entities/RoomImporter.php:96
+#, php-format
+msgid "Room number %s appears twice in the legacy list."
+msgstr ""
+
+#: includes/Import/Entities/RoomImporter.php:98
+msgid "The room has no floor."
+msgstr ""
+
+#: includes/Import/Entities/RoomImporter.php:100
+msgid "Its room type or floor was not imported."
+msgstr ""
+
+#. translators: 1: room number, 2: legacy status.
+#: includes/Import/Entities/RoomImporter.php:114
+#, php-format
+msgid "Room %1$s has the unknown status \"%2$s\"; imported as available."
+msgstr ""
+
+#. translators: 1: room number, 2: room type name.
+#: includes/Import/Entities/RoomImporter.php:146
+#, php-format
+msgid "Room number %1$s is already used by a room of %2$s (or a removed room)."
+msgstr ""
+
+#: includes/Import/Entities/RoomImporter.php:161
+msgid "Imported from the old system"
+msgstr ""
+
+#. translators: %s: room number.
+#: includes/Import/Entities/RoomImporter.php:172
+#, php-format
+msgid "Room %s changed room type in the old system; move it by hand if that is right."
+msgstr ""
+
+#: includes/Import/Entities/RoomImporter.php:189
+msgid "Changed in the old system"
+msgstr ""
+
+#. translators: %s: room number.
+#: includes/Import/Entities/RoomImporter.php:196
+#, php-format
+msgid "Room %s already exists in this room type; it was linked, not changed."
+msgstr ""
+
+#. translators: 1: numbers only in the PRO list, 2: numbers only in the room list.
+#: includes/Import/Entities/RoomImporter.php:227
+#, php-format
+msgid "The two legacy room lists differ. Only in the PRO list: %1$s. Only in the room list: %2$s."
+msgstr ""
+
+#: includes/Import/Entities/RoomTypeImporter.php:40
+msgid "Room types"
+msgstr ""
+
+#. translators: %s: room type name.
+#: includes/Import/Entities/RoomTypeImporter.php:87
+#, php-format
+msgid "A room type called %s already exists; it was linked, not changed."
+msgstr ""
+
+#. translators: %s: legacy room size text.
+#: includes/Import/Entities/RoomTypeImporter.php:136
+#, php-format
+msgid "The room size \"%s\" is not a number; left empty."
+msgstr ""
+
+#. translators: %d: number of photos.
+#: includes/Import/Entities/RoomTypeImporter.php:161
+#, php-format
+msgid "%d photo is not in this site's media library; add it by hand."
+msgid_plural "%d photos are not in this site's media library; add them by hand."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/Import/Entities/RoomTypeRateImporter.php:47
+msgid "Room-type prices"
+msgstr ""
+
+#: includes/Import/Entities/RoomTypeRateImporter.php:114
+msgid "This room type already has a price for this rate plan; it was linked, not changed."
+msgstr ""
+
+#: includes/Import/Entities/RoomTypeRateImporter.php:215
+msgid "The old sale price was not lower than the price; the sale was dropped."
+msgstr ""
+
+#: includes/Import/Entities/StaffAccessImporter.php:44
+msgid "Staff permissions and PINs"
+msgstr ""
+
+#: includes/Import/Entities/StaffAccessImporter.php:80
+msgid "Not a staff member who was imported; their permissions and PIN were skipped."
+msgstr ""
+
+#: includes/Import/Entities/StaffAccessImporter.php:88
+msgid "The old PIN is not 4 to 8 digits; it was not carried over. Set a new one for this person."
+msgstr ""
+
+#: includes/Import/Entities/StaffAccessImporter.php:132
+msgid "This person already has permissions or a PIN here; they were kept, not changed."
+msgstr ""
+
+#. translators: %d: number of PINs.
+#: includes/Import/Entities/StaffAccessImporter.php:142
+#, php-format
+msgid "%d PIN is carried over hashed; the old system kept it in plain text."
+msgid_plural "%d PINs are carried over hashed; the old system kept them in plain text."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/Import/Entities/StatutoryPaymentImporter.php:46
+msgid "Statutory payments"
+msgstr ""
+
+#: includes/Import/Entities/StatutoryPaymentImporter.php:81
+msgid "The old system lost which contribution this payment was for; enter it by hand."
+msgstr ""
+
+#. translators: 1: name, 2: amount, 3: date.
+#: includes/Import/Entities/StatutoryPaymentImporter.php:94
+#, php-format
+msgid "A payment for %1$s (%2$s on %3$s) matches no single imported deduction; enter it by hand."
+msgstr ""
+
+#: includes/Import/Entities/TimeOffImporter.php:39
+msgid "Time off"
+msgstr ""
+
+#: includes/Import/Entities/TimeOffImporter.php:75
+msgid "The last day was before the first; it was set to the first day."
+msgstr ""
+
+#: includes/Import/Entities/WorkShiftImporter.php:48
+msgid "Work shifts"
+msgstr ""
+
+#: includes/Import/Entities/WorkShiftImporter.php:85
+msgid "Every day of this shift is a day off in the old system; set its hours here."
+msgstr ""
+
+#: includes/Import/Entities/WorkShiftImporter.php:94
+msgid "A work shift with this name already exists; it was linked, not changed."
+msgstr ""
+
+#: includes/Import/ImportController.php:61
+msgid "Dry run finished. Nothing was written."
+msgstr ""
+
+#: includes/Import/ImportController.php:77
+msgid "Import finished."
+msgstr ""
+
+#: includes/Import/ImportController.php:96
+msgid "Only an administrator can import data."
+msgstr ""
+
+#: includes/Import/ImportService.php:83
+msgid "Run a dry run with the same settings first, and read its report."
+msgstr ""
+
+#: includes/Import/ImportService.php:87
+msgid "Some legacy tables are missing. Check the table prefix and run the dry run again."
+msgstr ""
+
+#: includes/Import/ImportService.php:102
+msgid "An import or dry run is already running. Wait for it to finish."
+msgstr ""
+
+#: includes/Import/ImportService.php:171
+msgid "Use letters, digits and underscores only."
+msgstr ""
+
+#: includes/Import/ImportService.php:174
+msgid "Choose a date, or leave it empty for now."
+msgstr ""
+
+#. translators: %s: table prefix.
+#: includes/Import/ImportService.php:209
+#, php-format
+msgid "Set the legacy import source to the tables starting with %s"
+msgstr ""
+
+#: includes/Import/LegacyImporter.php:115
+#: includes/Plugin.php:230
+msgid "Ran the legacy data import"
+msgstr ""
+
+#. translators: %s: database table name.
+#: includes/Import/LegacyImporter.php:171
+#, php-format
+msgid "Legacy table %s is missing."
+msgstr ""
+
+#: includes/Import/LegacyImporter.php:185
+msgid "Room types (accommodation products)"
+msgstr ""
+
+#: includes/Import/LegacyImporter.php:196
+msgid "Rate plans (rate_plan terms, before deduplication)"
+msgstr ""
+
+#: includes/Import/LegacyImporter.php:200
+msgid "Floors (distinct floor values)"
+msgstr ""
+
+#: includes/Import/LegacyImporter.php:203
+msgid "Booking lines (all, without trashed)"
+msgstr ""
+
+#: includes/Import/LegacyImporter.php:204
+msgid "Booking lines open at the cutover (pending, confirmed, checked in; to import)"
+msgstr ""
+
+#: includes/Import/LegacyImporter.php:207
+msgid "Blocked dates ending after the cutover"
+msgstr ""
+
+#: includes/Import/LegacyImporter.php:210
+msgid "Price-per-date rows from the cutover day"
+msgstr ""
+
+#: includes/Import/LegacyImporter.php:213
+msgid "Staff users"
+msgstr ""
+
+#: includes/Import/LegacyImporter.php:214
+msgid "Customer users"
+msgstr ""
+
+#: includes/Import/LegacyImporter.php:217
+msgid "WooCommerce orders (HPOS)"
+msgstr ""
+
+#: includes/Import/LegacyImporter.php:220
+msgid "Seasonal pricing rules"
+msgstr ""
+
+#: includes/Import/LegacyImporter.php:221
+msgid "Occupancy pricing rules"
+msgstr ""
+
+#: includes/Import/LegacyImporter.php:222
+msgid "Booking-window pricing rules"
+msgstr ""
+
+#: includes/Legacy/OrderMetaDisplay.php:49
+msgid "Stay"
+msgstr ""
+
+#: includes/Legacy/OrderMetaDisplay.php:50
+msgid "Rate plan"
+msgstr ""
+
+#. translators: %d: number of adults.
+#: includes/Legacy/OrderMetaDisplay.php:151
+#, php-format
+msgid "%d adult"
+msgid_plural "%d adults"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of children.
+#: includes/Legacy/OrderMetaDisplay.php:154
+#, php-format
+msgid "%d child"
+msgid_plural "%d children"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/Payroll/IvorianCalculator.php:47
+msgid "Côte d'Ivoire (CNPS, IS, CN, IGR)"
+msgstr ""
+
+#: includes/Payroll/IvorianPayroll.php:126
+msgid "Côte d'Ivoire payroll settings"
+msgstr ""
+
+#: includes/Payroll/StatutoryTable.php:133
+#: includes/Payroll/StatutoryTable.php:161
+msgid "Retirement fund"
+msgstr ""
+
+#: includes/Payroll/StatutoryTable.php:140
+msgid "Salary tax (IS)"
+msgstr ""
+
+#: includes/Payroll/StatutoryTable.php:147
+msgid "National contribution (CN)"
+msgstr ""
+
+#: includes/Payroll/StatutoryTable.php:154
+msgid "General income tax (IGR)"
+msgstr ""
+
+#: includes/Payroll/StatutoryTable.php:168
+msgid "Family benefits"
+msgstr ""
+
+#: includes/Payroll/StatutoryTable.php:175
+msgid "Work accident / disability insurance"
+msgstr ""
+
+#: includes/Plugin.php:85
+msgid "Radius Hotel Booking - Residence TATA needs Radius Hotel Booking and Radius Hotel Booking Pro to be installed and active."
+msgstr ""
+
+#: includes/Plugin.php:234
+msgid "Changed the legacy import source"
+msgstr ""
+
+#. translators: 1: the site's current time zone, 2: Africa/Abidjan.
+#: includes/Settings/LocalChecks.php:49
+#, php-format
+msgid "The site time zone is %1$s, not %2$s. Arrival times, payment deadlines and reports will be off until it is changed."
+msgstr ""
+
+#: includes/Settings/LocalChecks.php:53
+msgid "Set the time zone to Abidjan"
+msgstr ""
+
+#. translators: Keep the {…} merge tags as they are.
+#: includes/Settings/LocalDefaults.php:75
+msgid "Send {amount} by Wave before {deadline}, with {reference} as the message."
+msgstr ""
+
+#. translators: Keep the {…} merge tags as they are.
+#: includes/Settings/LocalDefaults.php:83
+msgid "Send {amount} by Orange Money before {deadline}, with {reference} as the message."
+msgstr ""
+
+#: radius-hotel-booking-residencetata.php:32
+msgid "Radius Hotel Booking - Residence TATA is missing its vendor folder. Run `composer install` in the plugin directory."
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:46
+msgid "Found"
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:47
+msgid "New"
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:49
+msgid "Linked"
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:50
+msgid "Updated"
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:51
+msgid "Unchanged"
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:52
+msgid "Skipped"
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:53
+msgid "Failed"
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:86
+msgid "Last dry run"
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:87
+msgid "Last import"
+msgstr ""
+
+#. translators: 1: date and time, 2: table prefix, 3: cutover date or "now".
+#: src/admin/import/ImportScreen.jsx:91
+#, js-format
+msgid "%1$s · tables %2$s* · cutover %3$s"
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:98
+msgid "now"
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:103
+msgid "Nothing written"
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:114
+msgid "In the legacy system"
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:139
+msgid "Would import"
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:143
+msgid "Imported"
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:154
+msgid "Data"
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:202
+msgid "No data importers are installed yet, so the run only summarises the legacy data."
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:212
+msgid "To look at"
+msgstr ""
+
+#. translators: 1: number of errors, 2: number of warnings.
+#: src/admin/import/ImportScreen.jsx:217
+#, js-format
+msgid "%1$d errors, %2$d warnings"
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:266
+msgid "Nothing to look at."
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:303
+msgid "The import could not be loaded"
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:310
+msgid "Try again"
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:368
+msgid "Legacy data"
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:372
+msgid "Bring rooms, rates, guests, staff and future bookings across from the old hotel plugins. The old data is only read, never changed."
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:380
+msgid "Legacy tables start with"
+msgstr ""
+
+#. translators: %s: this site's table prefix.
+#: src/admin/import/ImportScreen.jsx:386
+#, js-format
+msgid "This site's own prefix is %s. Change it only for a copy of the old database."
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:403
+msgid "Cutover date"
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:407
+msgid "Leave empty for the real cutover: bookings ending after now are imported. Set a date only for a test run."
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:443
+msgid "Run a dry run to check the tables with the new prefix."
+msgstr ""
+
+#. translators: 1: tables found, 2: tables needed.
+#: src/admin/import/ImportScreen.jsx:449
+#, js-format
+msgid "%1$d of %2$d legacy table found."
+msgid_plural "%1$d of %2$d legacy tables found."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: comma-separated table names.
+#: src/admin/import/ImportScreen.jsx:461
+#, js-format
+msgid "Missing: %s"
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:480
+msgid "Running the dry run…"
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:484
+msgid "Run a dry run"
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:495
+msgid "Run a dry run with these settings first."
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:502
+msgid "Importing…"
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:506
+#: src/admin/import/ImportScreen.jsx:565
+msgid "Import"
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:518
+msgid "Some legacy tables are missing: fix the prefix and run the dry run again."
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:522
+msgid "The import is available after a dry run with these settings."
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:550
+msgid "Import the legacy data now?"
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:556
+msgid "The dry run reported errors: those records will not be imported. Everything else is written into the new system. Running it again later updates what changed and creates no duplicates."
+msgstr ""
+
+#: src/admin/import/ImportScreen.jsx:560
+msgid "Everything the dry run counted is written into the new system. Running it again later updates what changed and creates no duplicates."
+msgstr ""
+
+#: src/admin/index.js:26
+msgid "Data import"
+msgstr ""
+
+#: src/admin/index.js:30
+msgid "Bring the data across from the old hotel plugins"
+msgstr ""
+
+#: src/admin/index.js:53
+msgid "Côte d’Ivoire payroll"
+msgstr ""
+
+#: src/admin/index.js:57
+msgid "Work accident rate for CNPS"
+msgstr ""
+
+#: src/admin/payroll/IvorianPayrollSection.jsx:28
+msgid "Statutory contributions"
+msgstr ""
+
+#: src/admin/payroll/IvorianPayrollSection.jsx:32
+msgid "CNPS and DGI rates and caps follow the law and are built in. Only the work accident rate is your own: CNPS sets it for your business."
+msgstr ""
+
+#: src/admin/payroll/IvorianPayrollSection.jsx:38
+msgid "Work accident / disability insurance rate"
+msgstr ""
+
+#: src/admin/payroll/IvorianPayrollSection.jsx:42
+msgid "Paid by the hotel on each salary, up to 70,000 CFA a month. Between 2 and 5 %."
+msgstr ""

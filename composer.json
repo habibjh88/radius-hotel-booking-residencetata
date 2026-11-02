@@ -1,0 +1,35 @@
+{
+    "name": "radiustheme/radius-hotel-booking-residencetata",
+    "description": "Residence TATA's add-on for Radius Hotel Booking. Requires the free plugin and Pro.",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "RadiusTheme",
+            "email": "support@radiustheme.com"
+        }
+    ],
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "RadiusTheme\\RadiusHotelBookingTata\\": "includes/"
+        }
+    },
+    "require": {
+        "php": ">=8.0"
+    },
+    "require-dev": {
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+        "phpcompatibility/phpcompatibility-wp": "^2.1",
+        "wp-coding-standards/wpcs": "^3.0"
+    },
+    "scripts": {
+        "phpcs": "./vendor/bin/phpcs --standard=phpcs.xml",
+        "phpcs:fix": "./vendor/bin/phpcbf --standard=phpcs.xml"
+    }
+}
