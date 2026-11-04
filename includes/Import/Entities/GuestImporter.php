@@ -247,7 +247,9 @@ final class GuestImporter extends AbstractImporter {
 				$with
 			);
 			if ( 0 !== $guest_id ) {
-				$this->linkAccount( $context, $user, $guest_id, $same_site ? $id : self::accountFor( $user ), $links );
+				$account = $same_site ? $id : self::accountFor( $user );
+				$this->linkAccount( $context, $user, $guest_id, $account, $links );
+				self::forgetUser( $account );
 				foreach ( self::seenKeys( $match, true ) as $key ) {
 					$seen[ $key ] = $seen[ $key ] ?? array( $guest_id, $id, $name );
 				}
@@ -323,6 +325,21 @@ final class GuestImporter extends AbstractImporter {
 			$found = get_user_by( 'email', (string) $user['user_email'] );
 		}
 		return $found ? (int) $found->ID : 0;
+	}
+
+	/**
+	 * Drop a user WordPress loaded for linking from the in-memory cache. Each
+	 * one keeps all its meta there until the request ends, and a shop with
+	 * thousands of customers ran a dry run out of memory.
+	 *
+	 * @param int $user_id User id (0 = none).
+	 * @return void
+	 */
+	private static function forgetUser( int $user_id ): void {
+		if ( $user_id > 0 ) {
+			wp_cache_delete( $user_id, 'users' );
+			wp_cache_delete( $user_id, 'user_meta' );
+		}
 	}
 
 	/**

@@ -73,6 +73,7 @@ Phone fields start on Côte d'Ivoire; old 8-digit Ivorian mobile numbers are sti
 Wave and Orange Money are offered as payment methods on a fresh install.
 Payroll moved to Radius Hotel Booking Pro; this add-on keeps the Côte d'Ivoire tax calculator.
 New Settings → Côte d'Ivoire payroll tab for the work accident rate.
+The import dry run no longer runs out of memory on shops with thousands of customers.
 
 The hotel's existing customers sign in and book with their saved ID and phone.
 Old customers are found by phone in every form, including old 8-digit numbers.

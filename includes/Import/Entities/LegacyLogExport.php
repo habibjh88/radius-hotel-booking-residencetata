@@ -29,6 +29,16 @@ final class LegacyLogExport implements EntityImporter {
 	public const KIND = 'tata_legacy';
 
 	/**
+	 * The old log's columns, as exported.
+	 */
+	private const COLUMNS = array( 'id', 'created_at', 'staff_id', 'user_role', 'event_type', 'action', 'description', 'object_type', 'object_id', 'ip_address', 'user_agent', 'hit_count' );
+
+	/**
+	 * Rows read per query.
+	 */
+	private const CHUNK = 2000;
+
+	/**
 	 * {@inheritDoc}
 	 */
 	public function key(): string {
@@ -70,12 +80,24 @@ final class LegacyLogExport implements EntityImporter {
 		if ( ! $context->source->has( 'hbfwc_restata_staff_log' ) ) {
 			return;
 		}
-		$rows = $context->source->rows( 'SELECT id, created_at, staff_id, user_role, event_type, action, description, object_type, object_id, ip_address, user_agent, hit_count FROM {hbfwc_restata_staff_log} ORDER BY id' );
-		$context->report->found( $this->key(), $rows ? 1 : 0 );
-		if ( ! $rows ) {
+		// Read in chunks: the whole log as PHP arrays ran the import out of memory.
+		// The checksum is the md5 of the JSON of all rows, built piece by piece.
+		$count = 0;
+		$last  = '';
+		$hash  = hash_init( 'md5' );
+		foreach ( self::chunks( $context ) as $rows ) {
+			foreach ( $rows as $row ) {
+				hash_update( $hash, ( $count ? ',' : '[' ) . wp_json_encode( $row ) );
+				++$count;
+				$last = $row['id'];
+			}
+		}
+		$context->report->found( $this->key(), $count ? 1 : 0 );
+		if ( ! $count ) {
 			return;
 		}
-		$checksum = ImportMap::checksum( array( count( $rows ), end( $rows )['id'], md5( (string) wp_json_encode( $rows ) ) ) );
+		hash_update( $hash, ']' );
+		$checksum = ImportMap::checksum( array( $count, $last, hash_final( $hash ) ) );
 		$status   = $context->map->status( $this->key(), 'log', $checksum );
 		if ( 'unchanged' === $status ) {
 			$context->report->count( $this->key(), 'unchanged' );
@@ -83,19 +105,21 @@ final class LegacyLogExport implements EntityImporter {
 		}
 		if ( $context->dry_run ) {
 			$context->report->count( $this->key(), $status );
-			$context->report->issue( $this->key(), 'log', sprintf( /* translators: %d: number of rows. */ _n( '%d old log entry will be kept as a CSV file.', '%d old log entries will be kept as a CSV file.', count( $rows ), 'radius-hotel-booking-residencetata' ), count( $rows ) ) );
+			$context->report->issue( $this->key(), 'log', sprintf( /* translators: %d: number of rows. */ _n( '%d old log entry will be kept as a CSV file.', '%d old log entries will be kept as a CSV file.', $count, 'radius-hotel-booking-residencetata' ), $count ) );
 			return;
 		}
 
-		$csv = fopen( 'php://temp', 'w+' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen -- an in-memory stream.
-		fputcsv( $csv, array_keys( $rows[0] ), ',', '"', '' );
-		foreach ( $rows as $row ) {
-			// A cell starting with = + - @ would run as a formula in a spreadsheet.
-			fputcsv( $csv, array_map( static fn( $cell ) => preg_match( '/^[=+\-@]/', (string) $cell ) ? "'" . $cell : $cell, $row ), ',', '"', '' );
+		$csv = fopen( 'php://temp', 'w+' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen -- a temporary stream (spills to disk when large).
+		fputcsv( $csv, self::COLUMNS, ',', '"', '' );
+		foreach ( self::chunks( $context ) as $rows ) {
+			foreach ( $rows as $row ) {
+				// A cell starting with = + - @ would run as a formula in a spreadsheet.
+				fputcsv( $csv, array_map( static fn( $cell ) => preg_match( '/^[=+\-@]/', (string) $cell ) ? "'" . $cell : $cell, $row ), ',', '"', '' );
+			}
 		}
 		rewind( $csv );
 		$contents = (string) stream_get_contents( $csv );
-		fclose( $csv ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose -- the in-memory stream.
+		fclose( $csv ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose -- the temporary stream.
 
 		try {
 			$file = ProtectedFiles::put( self::KIND, "\xEF\xBB\xBF" . $contents, 'legacy-activity-log-' . gmdate( 'Ymd-His' ) . '.csv', 'text/csv' );
@@ -111,10 +135,31 @@ final class LegacyLogExport implements EntityImporter {
 			'log',
 			sprintf(
 				/* translators: 1: number of rows, 2: download link. */
-				_n( '%1$d old log entry kept as a file; keep it with the cutover backup: %2$s', '%1$d old log entries kept as a file; keep it with the cutover backup: %2$s', count( $rows ), 'radius-hotel-booking-residencetata' ),
-				count( $rows ),
+				_n( '%1$d old log entry kept as a file; keep it with the cutover backup: %2$s', '%1$d old log entries kept as a file; keep it with the cutover backup: %2$s', $count, 'radius-hotel-booking-residencetata' ),
+				$count,
 				ProtectedFiles::url( (string) $file->token )
 			)
 		);
+	}
+
+	/**
+	 * The old log, in id order, a chunk of rows at a time.
+	 *
+	 * @param ImportContext $context The run.
+	 * @return \Generator<array[]>
+	 */
+	private static function chunks( ImportContext $context ): \Generator {
+		$after = 0;
+		do {
+			$rows = $context->source->rows(
+				'SELECT ' . implode( ', ', self::COLUMNS ) . ' FROM {hbfwc_restata_staff_log} WHERE id > %d ORDER BY id LIMIT %d',
+				array( $after, self::CHUNK )
+			);
+			$full = count( $rows ) === self::CHUNK;
+			if ( $rows ) {
+				$after = (int) end( $rows )['id'];
+				yield $rows;
+			}
+		} while ( $full );
 	}
 }
