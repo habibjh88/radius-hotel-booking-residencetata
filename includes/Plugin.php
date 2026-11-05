@@ -203,6 +203,9 @@ final class Plugin {
 			}
 			// Payroll (M15 T10): set-up, then history; every write goes through Pro's payroll classes.
 			if ( \RadiusTheme\RadiusHotelBookingTata\Payroll\IvorianPayroll::active() && class_exists( '\\RadiusTheme\\RadiusHotelBookingPro\\Payroll\\PayrollRunService' ) ) {
+				if ( class_exists( '\\RadiusTheme\\RadiusHotelBooking\\Services\\SettingsService' ) ) {
+					$importers[] = new \RadiusTheme\RadiusHotelBookingTata\Import\Entities\PayrollSettingsImporter();
+				}
 				$importers[] = new \RadiusTheme\RadiusHotelBookingTata\Import\Entities\PayScheduleImporter();
 				$importers[] = new \RadiusTheme\RadiusHotelBookingTata\Import\Entities\WorkShiftImporter();
 				$importers[] = new \RadiusTheme\RadiusHotelBookingTata\Import\Entities\EmployeePayImporter();

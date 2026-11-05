@@ -82,6 +82,8 @@ final class Assets {
 				'can_import' => current_user_can( 'manage_options' ),
 				// The Côte d'Ivoire payroll settings tab: only with Pro's payroll.
 				'ivorian_payroll' => \RadiusTheme\RadiusHotelBookingTata\Payroll\IvorianPayroll::active(),
+				// The built-in rates it lists, read-only (R1, as the legacy Tax Info tab).
+				'statutory_rates' => \RadiusTheme\RadiusHotelBookingTata\Payroll\IvorianPayroll::active() ? \RadiusTheme\RadiusHotelBookingTata\Payroll\IvorianPayroll::statutoryRates() : array(),
 				// The Food Menu dashboard, for the sidebar link ('' when not available to this user, R1-T18).
 				'food_menu_url'   => \RadiusTheme\RadiusHotelBookingTata\Settings\DashboardLinks::foodMenuUrl(),
 			)

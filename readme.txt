@@ -85,3 +85,5 @@ The Language menu offers English and French, keeping each person's choice from t
 Complete French translation, included in the add-on.
 The hotel and Food Menu dashboards now link to each other from their menus.
 Seniority bonus rule: 2 % after two years, plus 1 % a year, up to 25 %.
+Côte d'Ivoire payroll settings now list the built-in CNPS and DGI rates, read-only.
+Legacy import now carries over the work accident insurance rate from the old Tax Info.

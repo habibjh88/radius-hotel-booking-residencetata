@@ -69,6 +69,58 @@ final class IvorianPayroll {
 	}
 
 	/**
+	 * The built-in rates in force today, for the read-only list under the
+	 * work accident rate (as the legacy Tax Info tab): label, who pays, and
+	 * the rate in percent — one figure, or the lowest and highest of a scale.
+	 *
+	 * @return array<int, array{label:string, side:string, rate:?float, min:?float, max:?float}>
+	 */
+	public static function statutoryRates(): array {
+		$table = StatutoryTable::for( wp_date( 'Y-m-d' ) );
+		$pct   = static fn( $fraction ) => round( (float) $fraction * 100, 2 );
+		$scale = static function ( array $brackets ) use ( $pct ) {
+			$rates = array_map( static fn( $bracket ) => $pct( $bracket[1] ), $brackets );
+			return array(
+				'rate' => null,
+				'min'  => min( $rates ),
+				'max'  => max( $rates ),
+			);
+		};
+		$fixed = static fn( $fraction ) => array(
+			'rate' => $pct( $fraction ),
+			'min'  => null,
+			'max'  => null,
+		);
+
+		return array(
+			array(
+				'label' => __( 'Retirement fund (employer)', 'radius-hotel-booking-residencetata' ),
+				'side'  => 'employer',
+			) + $fixed( $table['cnps_pension']['employer_rate'] ),
+			array(
+				'label' => __( 'Family benefits', 'radius-hotel-booking-residencetata' ),
+				'side'  => 'employer',
+			) + $fixed( $table['family_allowance']['rate'] ),
+			array(
+				'label' => __( 'Retirement fund (employee)', 'radius-hotel-booking-residencetata' ),
+				'side'  => 'employee',
+			) + $fixed( $table['cnps_pension']['employee_rate'] ),
+			array(
+				'label' => __( 'Salary tax (IS)', 'radius-hotel-booking-residencetata' ),
+				'side'  => 'employee',
+			) + $fixed( $table['is_rate'] ),
+			array(
+				'label' => __( 'National contribution (CN)', 'radius-hotel-booking-residencetata' ),
+				'side'  => 'employee',
+			) + $scale( $table['cn']['brackets'] ),
+			array(
+				'label' => __( 'General income tax (IGR)', 'radius-hotel-booking-residencetata' ),
+				'side'  => 'employee',
+			) + $scale( $table['igr']['brackets'] ),
+		);
+	}
+
+	/**
 	 * `rtbp_settings_schema_init` listener.
 	 *
 	 * @return void
