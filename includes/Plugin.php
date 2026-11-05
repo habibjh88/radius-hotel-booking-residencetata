@@ -51,6 +51,10 @@ final class Plugin {
 	public static function instance(): Plugin {
 		if ( null === self::$instance ) {
 			self::$instance = new self();
+			// Pro has already booted when WordPress loads this add-on after it.
+			if ( did_action( 'rtbp_pro_loaded' ) ) {
+				self::$instance->boot();
+			}
 		}
 		return self::$instance;
 	}
