@@ -15,7 +15,9 @@ defined( 'ABSPATH' ) || exit;
  *
  * - Phone fields start on Côte d'Ivoire (`rtbp_settings_schema` default).
  * - Wave and Orange Money are offered as payment methods on a fresh
- *   install, beside cash and bank transfer.
+ *   install, beside cash and bank transfer. The dashboard shows Orange
+ *   Money as OM and cash as Cash (R1 client review), also on a site whose
+ *   methods were saved before short names existed (fill_short_names()).
  * - Ivorian numbers (`rtbp_phone_to_e164`): 10 digits since 31 January
  *   2021, a 2-digit operator prefix before the old 8 digits (mobile 01 Moov,
  *   05 MTN, 07 Orange; fixed 21, 25, 27). An old 8-digit **mobile** number
@@ -31,6 +33,19 @@ final class LocalDefaults {
 	private const CODE = '225';
 
 	/**
+	 * Set once the short names were filled into saved methods.
+	 */
+	private const SHORT_NAMES_DONE = 'rtbp_tata_payment_short_names';
+
+	/**
+	 * Short names by method key (free 1.0.0.1+: methods have a `short` name).
+	 */
+	private const SHORT_NAMES = array(
+		'cash'         => 'Cash',
+		'orange_money' => 'OM',
+	);
+
+	/**
 	 * Hook in.
 	 *
 	 * @return void
@@ -38,6 +53,45 @@ final class LocalDefaults {
 	public static function register(): void {
 		add_filter( 'rtbp_settings_schema', array( self::class, 'defaults' ) );
 		add_filter( 'rtbp_phone_to_e164', array( self::class, 'phone' ), 10, 3 );
+		// On any page an administrator opens (the hotel works in the front-end dashboard).
+		add_action( 'init', array( self::class, 'fill_short_names' ), 20 );
+	}
+
+	/**
+	 * Once: give saved Cash and Orange Money methods their short names, unless
+	 * the hotel already typed one. A fresh install gets them from the defaults.
+	 *
+	 * @return void
+	 */
+	public static function fill_short_names(): void {
+		if ( ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+		$free = '\\RadiusTheme\\RadiusHotelBooking\\';
+		if ( get_option( self::SHORT_NAMES_DONE ) || ! function_exists( 'rtbp_setting' )
+			|| ! defined( $free . 'Settings\\PaymentSettings::SHORT_LENGTH' )
+			|| ! class_exists( $free . 'Core\\Container\\Container' ) || ! class_exists( $free . 'Services\\SettingsService' ) ) {
+			return;
+		}
+		$methods = (array) rtbp_setting( 'payments', 'methods', array() );
+		$changed = false;
+		foreach ( $methods as $index => $method ) {
+			$key = (string) ( $method['key'] ?? '' );
+			if ( isset( self::SHORT_NAMES[ $key ] ) && '' === (string) ( $method['short'] ?? '' ) ) {
+				$methods[ $index ]['short'] = self::SHORT_NAMES[ $key ];
+				$changed                    = true;
+			}
+		}
+		try {
+			if ( $changed ) {
+				\RadiusTheme\RadiusHotelBooking\Core\Container\Container::resolve( \RadiusTheme\RadiusHotelBooking\Services\SettingsService::class )
+					->updateSection( 'payments', array( 'methods' => $methods ) );
+			}
+			update_option( self::SHORT_NAMES_DONE, 1 );
+		} catch ( \Throwable $e ) {
+			// Tried again on the next admin page; the names can also be typed in Settings → Payments.
+			unset( $e );
+		}
 	}
 
 	/**
@@ -79,6 +133,7 @@ final class LocalDefaults {
 			array(
 				'key'          => 'orange_money',
 				'label'        => 'Orange Money',
+				'short'        => 'OM',
 				/* translators: Keep the {…} merge tags as they are. */
 				'instructions' => __( 'Send {amount} by Orange Money before {deadline}, with {reference} as the message.', 'radius-hotel-booking-residencetata' ),
 				'account'      => '',

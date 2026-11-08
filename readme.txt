@@ -74,6 +74,9 @@ Wave and Orange Money are offered as payment methods on a fresh install.
 Payroll moved to Radius Hotel Booking Pro; this add-on keeps the Côte d'Ivoire tax calculator.
 New Settings → Côte d'Ivoire payroll tab for the work accident rate.
 The import dry run no longer runs out of memory on shops with thousands of customers.
+The dashboard shows Orange Money as OM and Cash at the desk as Cash.
+Seniority bonus is now 1 % per year since hiring (max 25 %), rising each work anniversary.
+The seniority bonus rule is set up automatically for every employee.
 
 The hotel's existing customers sign in and book with their saved ID and phone.
 Old customers are found by phone in every form, including old 8-digit numbers.
@@ -84,7 +87,7 @@ After an import, each guest's stay count and last stay are recounted from their 
 The Language menu offers English and French, keeping each person's choice from the old dashboard.
 Complete French translation, included in the add-on.
 The hotel and Food Menu dashboards now link to each other from their menus.
-Seniority bonus rule: 2 % after two years, plus 1 % a year, up to 25 %.
 Côte d'Ivoire payroll settings now list the built-in CNPS and DGI rates, read-only.
 Legacy import now carries over the work accident insurance rate from the old Tax Info.
 Fixed: add-on not loading when WordPress loads it after Radius Hotel Booking Pro.
+Data import screen now uses the full page width.

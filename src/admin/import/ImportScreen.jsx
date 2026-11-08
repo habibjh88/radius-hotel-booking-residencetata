@@ -289,7 +289,7 @@ export default function ImportScreen() {
 
 	if ( isPending ) {
 		return (
-			<div className="mx-auto max-w-4xl space-y-4">
+			<div className="space-y-4">
 				<Skeleton className="h-48 w-full rounded-xl" />
 				<Skeleton className="h-72 w-full rounded-xl" />
 			</div>
@@ -363,7 +363,7 @@ export default function ImportScreen() {
 	};
 
 	return (
-		<div className="mx-auto max-w-4xl space-y-4">
+		<div className="space-y-4">
 			<Panel
 				title={ __(
 					'Legacy data',
