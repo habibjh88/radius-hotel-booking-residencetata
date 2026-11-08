@@ -77,6 +77,7 @@ The import dry run no longer runs out of memory on shops with thousands of custo
 The dashboard shows Orange Money as OM and Cash at the desk as Cash.
 Seniority bonus is now 1 % per year since hiring (max 25 %), rising each work anniversary.
 The seniority bonus rule is set up automatically for every employee.
+Staff photos from the old dashboard are imported and linked to each staff file.
 
 The hotel's existing customers sign in and book with their saved ID and phone.
 Old customers are found by phone in every form, including old 8-digit numbers.

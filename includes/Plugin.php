@@ -126,6 +126,8 @@ final class Plugin {
 		add_action( 'init', array( OrderMetaDisplay::class, 'register' ), 5 );
 		// The hotel's customers book signed in with their old accounts (free: Settings → Guest accounts).
 		\RadiusTheme\RadiusHotelBookingTata\Legacy\CustomerProfile::register();
+		// Staff photos from the old dashboard, linked once to the staff files (Pro's `avatar_id`).
+		\RadiusTheme\RadiusHotelBookingTata\Legacy\StaffPhotos::register();
 		if ( class_exists( '\\RadiusTheme\\RadiusHotelBooking\\Storage\\ProtectedFiles' ) ) {
 			add_filter( 'rtbp_file_kinds', array( \RadiusTheme\RadiusHotelBookingTata\Import\Entities\LegacyLogExport::class, 'kind' ) );
 		}

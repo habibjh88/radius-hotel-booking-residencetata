@@ -82,7 +82,7 @@ final class EmployeeImporter extends AbstractImporter {
 		$repo      = new EmployeeRepository();
 		$same_site = $this->same_site ?? ( $source->prefix() === $wpdb->prefix );
 		$cap       = $source->metaPrefix() . 'capabilities';
-		$keys      = array( 'first_name', 'last_name', 'billing_phone', 'staff_dob', 'staff_address', 'staff_em_contact', '_hbfwc_staff_banned' );
+		$keys      = array( 'first_name', 'last_name', 'billing_phone', 'staff_dob', 'staff_address', 'staff_em_contact', '_hbfwc_staff_banned', 'hbfwc_profile_image' );
 
 		$users = $source->rows(
 			'SELECT u.ID, u.user_login, u.user_email, u.display_name FROM {users} u
@@ -122,6 +122,11 @@ final class EmployeeImporter extends AbstractImporter {
 			$account = $same_site ? $id : $this->accountFor( $user );
 			$fields  = $data;
 			unset( $fields['banned'] );
+			// The staff photo: a media library image of this site, so only on the same site.
+			$photo = $same_site ? (int) ( $meta[ $id ]['hbfwc_profile_image'] ?? 0 ) : 0;
+			if ( $photo && wp_attachment_is_image( $photo ) ) {
+				$fields['avatar_id'] = $photo;
+			}
 
 			$this->import(
 				$context,
@@ -152,6 +157,9 @@ final class EmployeeImporter extends AbstractImporter {
 					$update = $fields;
 					if ( '' === $update['phone'] ) {
 						unset( $update['phone'] ); // Never blank a phone someone added here.
+					}
+					if ( ! empty( $service->get( $employee_id )->avatar_id ) ) {
+						unset( $update['avatar_id'] ); // Never replace a photo chosen here.
 					}
 					$service->update( $employee_id, $update );
 					if ( $data['banned'] && $service->get( $employee_id )->is_active ) {
