@@ -9,6 +9,7 @@ namespace RadiusTheme\RadiusHotelBookingTata\Import\Entities;
 
 use RadiusTheme\RadiusHotelBookingPro\Staff\ContractService;
 use RadiusTheme\RadiusHotelBookingTata\Import\ImportContext;
+use RadiusTheme\RadiusHotelBookingTata\Staff\StaffNames;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -75,8 +76,9 @@ final class EmployeeContractImporter extends AbstractImporter {
 			$ended  = in_array( strtolower( (string) $row['status'] ), array( 'fired', 'terminated', 'ended', 'inactive' ), true );
 			$input  = array(
 				'job_type'   => in_array( $type, array( 'full_time', 'part_time', 'contract', 'internship' ), true ) ? $type : 'other',
-				'job_title'  => self::text( $row['job_title'] ),
-				'department' => self::text( $row['department'] ),
+				// The hotel's names, not the old free-typed variants (StaffNames).
+				'job_title'  => StaffNames::job( self::text( $row['job_title'] ) ),
+				'department' => StaffNames::department( self::text( $row['department'] ), self::text( $row['job_title'] ) ),
 				'start_date' => substr( (string) $row['hire_date'], 0, 10 ),
 				'status'     => $ended ? 'terminated' : 'active',
 				'end_date'   => $ended ? substr( (string) ( $row['updated_at'] ? $row['updated_at'] : $row['created_at'] ), 0, 10 ) : '',

@@ -108,12 +108,22 @@ final class LocalDefaults {
 		if ( isset( $sections['payments']['methods'] ) ) {
 			$sections['payments']['methods']['default'] = array( self::class, 'payment_methods' );
 		}
+		// Pro's Social contributions start with the CNPS rows (the old system's values).
+		if ( isset( $sections['payroll']['contributions'] ) && class_exists( '\\RadiusTheme\\RadiusHotelBookingTata\\Payroll\\StatutorySettings' ) ) {
+			$sections['payroll']['contributions']['default'] = array( '\\RadiusTheme\\RadiusHotelBookingTata\\Payroll\\StatutorySettings', 'contributions' );
+			// The work accident rate stays within the 2–5 % the law allows (CNPS).
+			$sections['payroll']['contributions']['sanitize'] = \RadiusTheme\RadiusHotelBookingTata\Payroll\StatutorySettings::guardContributions( $sections['payroll']['contributions']['sanitize'] ?? null );
+		}
+		// Pro's cash register (R3-T7): the desk opens it before taking any payment.
+		if ( isset( $sections['pro_cash_register']['requireOpen'] ) ) {
+			$sections['pro_cash_register']['requireOpen']['default'] = true;
+		}
 		return $sections;
 	}
 
 	/**
 	 * Payment methods on a fresh install: the free plugin's, with Wave and
-	 * Orange Money after cash.
+	 * Orange Money after cash, each requiring its transaction ID.
 	 *
 	 * @return array[]
 	 */
@@ -128,6 +138,9 @@ final class LocalDefaults {
 				/* translators: Keep the {…} merge tags as they are. */
 				'instructions' => __( 'Send {amount} by Wave before {deadline}, with {reference} as the message.', 'radius-hotel-booking-residencetata' ),
 				'account'      => '',
+				// Each mobile money payment carries its transaction number, to check it against the statement (R3-T3).
+				'reference'       => 'required',
+				'reference_label' => __( 'Transaction ID', 'radius-hotel-booking-residencetata' ),
 				'enabled'      => true,
 			),
 			array(
@@ -137,6 +150,9 @@ final class LocalDefaults {
 				/* translators: Keep the {…} merge tags as they are. */
 				'instructions' => __( 'Send {amount} by Orange Money before {deadline}, with {reference} as the message.', 'radius-hotel-booking-residencetata' ),
 				'account'      => '',
+				// Each mobile money payment carries its transaction number, to check it against the statement (R3-T3).
+				'reference'       => 'required',
+				'reference_label' => __( 'Transaction ID', 'radius-hotel-booking-residencetata' ),
 				'enabled'      => true,
 			),
 		);

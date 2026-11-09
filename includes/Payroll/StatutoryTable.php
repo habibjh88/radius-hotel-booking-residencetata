@@ -12,10 +12,10 @@ use InvalidArgumentException;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * The **only** place payroll rates, caps and brackets live (the legacy code
- * kept two copies of the brackets). Versioned by effective date: a run uses
- * the version in force on its pay date, and stores the version it used, so
- * a past payslip never changes when the law does.
+ * The figures the Ivorian calculator uses on a pay date, read from settings
+ * (StatutorySettings): the CNPS contributions from Pro's Settings → Payroll
+ * → Social contributions, the DGI taxes from Settings → Côte d'Ivoire
+ * payroll. They start from the old system's values.
  *
  * Amounts are monthly francs; rates are fractions (`0.063` = 6.3 %).
  * A scale is `[ [ up_to|null, rate ], … ]` with a `mode`:
@@ -24,8 +24,6 @@ defined( 'ABSPATH' ) || exit;
  * - `progressive` — each slice is taxed at its own rate.
  * `family_quotient` (IGR) divides the taxable base by the employee's parts
  * before the scale and multiplies back; the legacy system has none (false).
- * CN and IGR mode and the quotient are to be confirmed with the client's
- * accountant (M15 acceptance 1): the answer is a change to this table only.
  */
 final class StatutoryTable {
 
@@ -40,82 +38,170 @@ final class StatutoryTable {
 	);
 
 	/**
-	 * Effective date (Y-m-d) => table.
+	 * The table on a pay date: today's settings (Social contributions and
+	 * Settings → Côte d'Ivoire payroll, StatutorySettings). A pay run line
+	 * keeps the figures it used, so a past payslip never changes when the
+	 * settings do; `version` is `ci-legacy` while every figure is still the
+	 * old system's, else a short fingerprint of them.
 	 *
-	 * @return array<string, array>
-	 */
-	private static function versions(): array {
-		return array(
-			// As run by the old system until the cutover (verify with the accountant).
-			'2000-01-01' => array(
-				'version'          => 'ci-legacy',
-				'cnps_pension'     => array(
-					'cap'           => '2700000',
-					'employee_rate' => '0.063',
-					'employer_rate' => '0.077',
-				),
-				'family_allowance' => array(
-					'cap'  => '70000',
-					'rate' => '0.0575',
-				),
-				'work_injury'      => array(
-					'cap'      => '70000',
-					'min_rate' => '0.02',
-					'max_rate' => '0.05',
-				),
-				'taxable_ratio'    => '0.8',
-				'is_rate'          => '0.015',
-				'cn'               => array(
-					'mode'     => 'flat',
-					'brackets' => array(
-						array( '600000', '0' ),
-						array( '1560000', '0.015' ),
-						array( '2400000', '0.05' ),
-						array( null, '0.10' ),
-					),
-				),
-				'igr'              => array(
-					'ratio'           => '0.85',
-					'mode'            => 'flat',
-					'family_quotient' => false,
-					'brackets'        => array(
-						array( '300000', '0' ),
-						array( '547000', '0.10' ),
-						array( '979000', '0.15' ),
-						array( '1519000', '0.20' ),
-						array( '2644000', '0.25' ),
-						array( '4669000', '0.35' ),
-						array( '10106000', '0.45' ),
-						array( null, '0.60' ),
-					),
-				),
-			),
-		);
-	}
-
-	/**
-	 * The table in force on a date.
+	 * `contributions` lists every Social contributions row
+	 * `{ key, code, label, authority, side, rate (fraction), cap|null }`; the
+	 * CNPS ones keep their legacy line keys (PENSION_EMPLOYEE…).
 	 *
 	 * @param string $date Y-m-d (the pay date).
 	 * @return array
-	 * @throws InvalidArgumentException On a bad date or one before every version.
+	 * @throws InvalidArgumentException On a bad date.
 	 */
 	public static function for( string $date ): array {
 		if ( ! preg_match( '/^\d{4}-\d{2}-\d{2}$/', $date ) ) {
 			// phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped -- a programming error, never shown as HTML.
 			throw new InvalidArgumentException( 'Use a Y-m-d pay date.' );
 		}
-		$found = null;
-		foreach ( self::versions() as $from => $table ) {
-			if ( $from <= $date ) {
-				$found = $table + array( 'effective_from' => $from );
+		$taxes    = StatutorySettings::taxes();
+		$fraction = static fn( $percent ) => self::fraction( $percent );
+		$scale    = static fn( $rows ) => array_map(
+			static fn( $row ) => array(
+				'' === (string) ( $row['upTo'] ?? '' ) ? null : self::number( $row['upTo'] ),
+				$fraction( $row['rate'] ?? 0 ),
+			),
+			array_values( (array) $rows )
+		);
+		$table    = array(
+			'contributions' => self::contributions( StatutorySettings::contributionRows() ),
+			'taxable_ratio' => $fraction( $taxes['taxableRatio'] ),
+			'is_rate'       => $fraction( $taxes['isRate'] ),
+			'cn'            => array(
+				'mode'     => 'progressive' === $taxes['cnMode'] ? 'progressive' : 'flat',
+				'brackets' => $scale( $taxes['cnBrackets'] ),
+			),
+			'igr'           => array(
+				'ratio'           => $fraction( $taxes['igrRatio'] ),
+				'mode'            => 'progressive' === $taxes['igrMode'] ? 'progressive' : 'flat',
+				'family_quotient' => ! empty( $taxes['igrFamilyQuotient'] ),
+				'brackets'        => $scale( $taxes['igrBrackets'] ),
+			),
+		);
+		$legacy  = self::fingerprint( self::legacy() );
+		$current = self::fingerprint( $table );
+		return $table + array(
+			'version'        => $legacy === $current ? 'ci-legacy' : 'ci-' . substr( $current, 0, 10 ),
+			'effective_from' => $date,
+		);
+	}
+
+	/**
+	 * The Social contributions rows as the calculator reads them.
+	 *
+	 * @param array[] $rows Rows `{ code, label, authority, side, rate (%), cap }`.
+	 * @return array[]
+	 */
+	private static function contributions( array $rows ): array {
+		$keys = array(
+			'CNPS_PENSION|employee'          => 'PENSION_EMPLOYEE',
+			'CNPS_PENSION|employer'          => 'PENSION_EMPLOYER',
+			'CNPS_FAMILY_ALLOWANCE|employer' => 'FAMILY_ALLOWANCE',
+			'CNPS_WORK_INJURY|employer'      => 'WORK_INJURY',
+		);
+		$out  = array();
+		foreach ( $rows as $row ) {
+			$code  = strtoupper( (string) ( $row['code'] ?? '' ) );
+			$side  = 'employer' === ( $row['side'] ?? '' ) ? 'employer' : 'employee';
+			$cap   = (float) ( $row['cap'] ?? 0 );
+			$out[] = array(
+				// Another row's key cannot match a CNPS one (`C_` prefix); code + side is unique (Pro's sanitizer).
+				'key'       => $keys[ $code . '|' . $side ] ?? 'C_' . $code . '_' . strtoupper( $side ),
+				'code'      => $code,
+				'label'     => (string) ( $row['label'] ?? $code ),
+				'authority' => (string) ( $row['authority'] ?? '' ),
+				'side'      => $side,
+				'rate'      => self::fraction( $row['rate'] ?? 0 ),
+				'cap'       => $cap > 0 ? self::number( $cap ) : null,
+			);
+		}
+		return $out;
+	}
+
+	/**
+	 * The old system's figures (fixed in its code), to tell whether today's
+	 * settings still match them. The work accident rate is the hotel's own.
+	 *
+	 * @return array
+	 */
+	private static function legacy(): array {
+		$taxes = array_map( static fn( $def ) => $def['default'], StatutorySettings::taxSchema() );
+		$rows  = StatutorySettings::contributions( self::injuryRate( StatutorySettings::contributionRows() ) );
+		$scale = static fn( $rows ) => array_map(
+			static fn( $row ) => array(
+				'' === (string) $row['upTo'] ? null : self::number( $row['upTo'] ),
+				self::fraction( $row['rate'] ),
+			),
+			$rows
+		);
+		return array(
+			'contributions' => self::contributions( $rows ),
+			'taxable_ratio' => self::fraction( $taxes['taxableRatio'] ),
+			'is_rate'       => self::fraction( $taxes['isRate'] ),
+			'cn'            => array(
+				'mode'     => 'flat',
+				'brackets' => $scale( $taxes['cnBrackets'] ),
+			),
+			'igr'           => array(
+				'ratio'           => self::fraction( $taxes['igrRatio'] ),
+				'mode'            => 'flat',
+				'family_quotient' => false,
+				'brackets'        => $scale( $taxes['igrBrackets'] ),
+			),
+		);
+	}
+
+	/**
+	 * The work accident rate among the rows (percent), else the old default.
+	 *
+	 * @param array[] $rows Social contributions rows.
+	 * @return float
+	 */
+	private static function injuryRate( array $rows ): float {
+		foreach ( $rows as $row ) {
+			if ( 'CNPS_WORK_INJURY' === strtoupper( (string) ( $row['code'] ?? '' ) ) ) {
+				return (float) ( $row['rate'] ?? 0 );
 			}
 		}
-		if ( null === $found ) {
-			// phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped -- a programming error, never shown as HTML.
-			throw new InvalidArgumentException( 'No statutory table for ' . $date . '.' );
+		return (float) StatutorySettings::DEFAULT_INJURY_RATE;
+	}
+
+	/**
+	 * The figures that change a result, hashed (labels left out).
+	 *
+	 * @param array $table Table.
+	 * @return string
+	 */
+	private static function fingerprint( array $table ): string {
+		foreach ( $table['contributions'] as &$row ) {
+			unset( $row['label'], $row['authority'], $row['key'] );
 		}
-		return $found;
+		unset( $row );
+		return md5( (string) wp_json_encode( $table ) );
+	}
+
+	/**
+	 * A percent as a fraction string: `6.3` → `0.063`.
+	 *
+	 * @param mixed $percent Percent.
+	 * @return string
+	 */
+	private static function fraction( $percent ): string {
+		return self::number( (float) $percent / 100 );
+	}
+
+	/**
+	 * A number as a plain decimal string (no exponent, no trailing zeros).
+	 *
+	 * @param mixed $value Number.
+	 * @return string
+	 */
+	private static function number( $value ): string {
+		$text = rtrim( rtrim( number_format( (float) $value, 8, '.', '' ), '0' ), '.' );
+		return '' === $text || '-0' === $text ? '0' : $text;
 	}
 
 	/**

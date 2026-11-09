@@ -78,6 +78,7 @@ The dashboard shows Orange Money as OM and Cash at the desk as Cash.
 Seniority bonus is now 1 % per year since hiring (max 25 %), rising each work anniversary.
 The seniority bonus rule is set up automatically for every employee.
 Staff photos from the old dashboard are imported and linked to each staff file.
+Fixed: importing after activation now brings the old work accident rate into Social contributions.
 
 The hotel's existing customers sign in and book with their saved ID and phone.
 Old customers are found by phone in every form, including old 8-digit numbers.
@@ -92,3 +93,11 @@ Côte d'Ivoire payroll settings now list the built-in CNPS and DGI rates, read-o
 Legacy import now carries over the work accident insurance rate from the old Tax Info.
 Fixed: add-on not loading when WordPress loads it after Radius Hotel Booking Pro.
 Data import screen now uses the full page width.
+Wave and Orange Money payments now require their transaction ID.
+Staff must open their cash register before taking a payment (Pro cash register).
+Settings → Staff starts with the hotel's departments and job titles.
+Staff departments and job titles are cleaned of old spellings, on import and once on update.
+Côte d'Ivoire payroll: CNPS rates now in Settings → Payroll → Social contributions, editable.
+Côte d'Ivoire payroll: IS, CN and IGR rates and scales are now editable settings.
+Import fills Social contributions with the old CNPS rates and work accident rate.
+Settings refuse a work accident rate outside 2–5 % and an empty CN or IGR scale.

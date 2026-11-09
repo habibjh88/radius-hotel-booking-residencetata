@@ -110,6 +110,8 @@ final class Plugin {
 		LocalDefaults::register();
 		// The account menu offers English and French, like the old dashboard (free 1.0.21+, R1-T6).
 		LocalLanguages::register();
+		// The hotel's departments and job titles (Pro Settings → Staff), and the old names cleaned.
+		\RadiusTheme\RadiusHotelBookingTata\Staff\StaffNames::register();
 		// The hotel and Food Menu dashboards link to each other (R1-T18).
 		\RadiusTheme\RadiusHotelBookingTata\Settings\DashboardLinks::register();
 		if ( class_exists( '\\RadiusTheme\\RadiusHotelBooking\\Settings\\SettingsSchema' ) ) {

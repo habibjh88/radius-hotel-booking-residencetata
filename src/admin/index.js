@@ -39,8 +39,9 @@ if ( window.rtbp_tata?.can_import ) {
 }
 
 /*
- * M15: Côte d'Ivoire payroll — the work accident rate the Ivorian calculator
- * uses (saved with `payroll.tax_settings`). Payroll itself is Pro's.
+ * M15: Côte d'Ivoire payroll — the DGI tax figures the Ivorian calculator
+ * uses (saved with `payroll.tax_settings`); its CNPS contributions are Pro's
+ * Settings → Payroll → Social contributions. Payroll itself is Pro's.
  */
 if ( window.rtbp_tata?.ivorian_payroll ) {
 	addFilter(
@@ -55,7 +56,7 @@ if ( window.rtbp_tata?.ivorian_payroll ) {
 					'radius-hotel-booking-residencetata'
 				),
 				description: __(
-					'Work accident rate for CNPS',
+					'IS, CN and IGR rates and scales',
 					'radius-hotel-booking-residencetata'
 				),
 				icon: Banknote,

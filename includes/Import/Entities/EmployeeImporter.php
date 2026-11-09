@@ -11,6 +11,7 @@ use RadiusTheme\RadiusHotelBookingPro\Staff\Employee;
 use RadiusTheme\RadiusHotelBookingPro\Staff\EmployeeRepository;
 use RadiusTheme\RadiusHotelBookingPro\Staff\EmployeeService;
 use RadiusTheme\RadiusHotelBookingTata\Import\ImportContext;
+use RadiusTheme\RadiusHotelBookingTata\Staff\StaffNames;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -229,8 +230,9 @@ final class EmployeeImporter extends AbstractImporter {
 			'emergency'  => $emergency,
 			'cnps_no'    => trim( (string) ( $contract['cnps'] ?? '' ) ),
 			'tax_no'     => trim( (string) ( $contract['tax_number'] ?? '' ) ),
-			'department' => self::text( $contract['department'] ?? '' ),
-			'job_title'  => self::text( $contract['job_title'] ?? '' ),
+			// The hotel's names, not the old free-typed variants (StaffNames).
+			'department' => StaffNames::department( self::text( $contract['department'] ?? '' ), self::text( $contract['job_title'] ?? '' ) ),
+			'job_title'  => StaffNames::job( self::text( $contract['job_title'] ?? '' ) ),
 			'banned'     => in_array( strtolower( trim( (string) ( $m['_hbfwc_staff_banned'] ?? '' ) ) ), array( '1', 'yes', 'true', 'on' ), true ),
 		);
 	}
