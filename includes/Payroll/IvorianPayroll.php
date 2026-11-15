@@ -44,6 +44,10 @@ final class IvorianPayroll {
 		add_action( 'rtbp_settings_schema_init', array( self::class, 'schema' ) );
 		add_filter( 'rtbp_settings_access_key', array( self::class, 'accessKey' ), 10, 2 );
 		add_action( 'rtbp_settings_updated', array( self::class, 'log' ), 10, 3 );
+		// Payroll → Tax info (read only), with Pro's request guard.
+		if ( trait_exists( '\\RadiusTheme\\RadiusHotelBookingPro\\Access\\GuardsRequests' ) ) {
+			add_action( 'rtbp_register_addon_routes', array( TaxInfoController::class, 'routes' ) );
+		}
 	}
 
 	/**

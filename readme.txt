@@ -101,3 +101,5 @@ Côte d'Ivoire payroll: CNPS rates now in Settings → Payroll → Social contri
 Côte d'Ivoire payroll: IS, CN and IGR rates and scales are now editable settings.
 Import fills Social contributions with the old CNPS rates and work accident rate.
 Settings refuse a work accident rate outside 2–5 % and an empty CN or IGR scale.
+New read-only Tax info tab on Payroll: CNPS contributions, IS, CN and IGR rates.
+New sites now start in FCFA (XOF, 15 000 CFA) instead of US dollars.

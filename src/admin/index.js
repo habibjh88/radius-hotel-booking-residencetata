@@ -67,6 +67,21 @@ if ( window.rtbp_tata?.ivorian_payroll ) {
 			},
 		]
 	);
+
+	// Payroll → Tax info: the same figures, read only (as on the old dashboard).
+	// Pro without the `rtbp.payroll.tabs` filter simply never calls this.
+	addFilter(
+		'rtbp.payroll.tabs',
+		'radius-hotel-booking-residencetata/tax-info',
+		( tabs ) => [
+			...tabs,
+			{
+				key: 'tax-info',
+				label: __( 'Tax info', 'radius-hotel-booking-residencetata' ),
+				Component: lazy( () => import( './payroll/TaxInfoTab' ) ),
+			},
+		]
+	);
 }
 
 /*

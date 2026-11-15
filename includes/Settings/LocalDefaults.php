@@ -105,6 +105,20 @@ final class LocalDefaults {
 		if ( isset( $sections['phone']['defaultCountry'] ) ) {
 			$sections['phone']['defaultCountry']['default'] = 'CI';
 		}
+		// FCFA, "15 000 CFA": the free plugin starts in US dollars until General is saved.
+		$currency = array(
+			'currencyCode'      => 'XOF',
+			'currencySymbol'    => 'CFA',
+			'currencyPosition'  => 'right_space',
+			'thousandSeparator' => ' ',
+			'decimalSeparator'  => ',',
+			'decimals'          => 0,
+		);
+		foreach ( $currency as $key => $value ) {
+			if ( isset( $sections['general'][ $key ] ) ) {
+				$sections['general'][ $key ]['default'] = $value;
+			}
+		}
 		if ( isset( $sections['payments']['methods'] ) ) {
 			$sections['payments']['methods']['default'] = array( self::class, 'payment_methods' );
 		}
