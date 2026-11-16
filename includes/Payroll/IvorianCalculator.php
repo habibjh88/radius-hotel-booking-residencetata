@@ -96,8 +96,14 @@ final class IvorianCalculator extends AbstractCalculator {
 		$employer = array();
 		$withheld = '0';
 		foreach ( $table['contributions'] as $row ) {
-			$base   = null === $row['cap'] ? $monthly : Decimal::min( $monthly, $row['cap'] );
-			$amount = Decimal::mul( $base, $row['rate'] );
+			$base = null === $row['cap'] ? $monthly : Decimal::min( $monthly, $row['cap'] );
+			if ( null !== ( $row['amount'] ?? null ) ) {
+				// A fixed amount per month (e.g. CMU), taken whenever there is pay; no rate.
+				$base   = $monthly;
+				$amount = Decimal::cmp( $monthly, '0' ) > 0 ? $row['amount'] : '0';
+			} else {
+				$amount = Decimal::mul( $base, $row['rate'] );
+			}
 			$line   = array(
 				'code'      => $row['code'],
 				'authority' => $row['authority'],
@@ -105,7 +111,7 @@ final class IvorianCalculator extends AbstractCalculator {
 				'kind'      => 'contribution',
 				'label'     => $row['label'],
 				'base'      => $base,
-				'rate'      => $row['rate'],
+				'rate'      => null !== ( $row['amount'] ?? null ) ? null : $row['rate'],
 				'amount'    => $amount,
 			);
 			if ( 'employee' === $row['side'] ) {

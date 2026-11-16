@@ -45,7 +45,8 @@ final class StatutoryTable {
 	 * old system's, else a short fingerprint of them.
 	 *
 	 * `contributions` lists every Social contributions row
-	 * `{ key, code, label, authority, side, rate (fraction), cap|null }`; the
+	 * `{ key, code, label, authority, side, rate (fraction), cap|null, amount|null }`
+	 * (`amount`: a fixed amount per month such as CMU, rate then unused); the
 	 * CNPS ones keep their legacy line keys (PENSION_EMPLOYEE…).
 	 *
 	 * @param string $date Y-m-d (the pay date).
@@ -116,6 +117,8 @@ final class StatutoryTable {
 				'side'      => $side,
 				'rate'      => self::fraction( $row['rate'] ?? 0 ),
 				'cap'       => $cap > 0 ? self::number( $cap ) : null,
+				// A fixed amount per month (Pro's "Fixed amount" contributions; older Pro has none).
+				'amount'    => 'amount' === ( $row['type'] ?? '' ) ? self::number( $row['amount'] ?? 0 ) : null,
 			);
 		}
 		return $out;

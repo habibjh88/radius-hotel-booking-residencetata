@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-02T07:01:41+00:00\n"
+"POT-Creation-Date: 2026-11-16T08:48:51+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: radius-hotel-booking-residencetata\n"
@@ -163,23 +163,23 @@ msgstr ""
 msgid "The room is not free for %1$s: %2$s"
 msgstr ""
 
-#: includes/Import/Entities/EmployeeContractImporter.php:38
+#: includes/Import/Entities/EmployeeContractImporter.php:39
 msgid "Staff contracts"
 msgstr ""
 
-#: includes/Import/Entities/EmployeeContractImporter.php:66
+#: includes/Import/Entities/EmployeeContractImporter.php:67
 #: includes/Import/Entities/EmployeeDeductionImporter.php:81
 #: includes/Import/Entities/EmployeePayImporter.php:93
 #: includes/Import/Entities/TimeOffImporter.php:69
 msgid "Its staff member was not imported."
 msgstr ""
 
-#: includes/Import/Entities/EmployeeContractImporter.php:71
+#: includes/Import/Entities/EmployeeContractImporter.php:72
 msgid "The old contract has a document file; attach it to the staff file by hand."
 msgstr ""
 
 #. translators: %s: date.
-#: includes/Import/Entities/EmployeeContractImporter.php:86
+#: includes/Import/Entities/EmployeeContractImporter.php:88
 #, php-format
 msgid "The contract ended in the old system, which keeps no end date; %s (its last change) was used."
 msgstr ""
@@ -194,32 +194,32 @@ msgstr ""
 msgid "%1$s was imported with the %2$s still owed (of %3$s); what was already taken stays in the pay history."
 msgstr ""
 
-#: includes/Import/Entities/EmployeeImporter.php:63
+#: includes/Import/Entities/EmployeeImporter.php:64
 msgid "Staff files"
 msgstr ""
 
 #. translators: %s: login.
-#: includes/Import/Entities/EmployeeImporter.php:114
+#: includes/Import/Entities/EmployeeImporter.php:115
 #, php-format
 msgid "Staff user %s has no first and last name."
 msgstr ""
 
 #. translators: %s: name.
-#: includes/Import/Entities/EmployeeImporter.php:118
+#: includes/Import/Entities/EmployeeImporter.php:119
 #, php-format
 msgid "%s has no phone number in the old system; add it to the staff file."
 msgstr ""
 
-#: includes/Import/Entities/EmployeeImporter.php:147
-#: includes/Import/Entities/EmployeeImporter.php:158
+#: includes/Import/Entities/EmployeeImporter.php:153
+#: includes/Import/Entities/EmployeeImporter.php:167
 #: includes/Import/Entities/GuestImporter.php:236
 #: includes/Import/Entities/GuestImporter.php:244
-#: includes/Import/Entities/GuestImporter.php:468
+#: includes/Import/Entities/GuestImporter.php:485
 msgid "Banned in the old system."
 msgstr ""
 
 #. translators: %s: login.
-#: includes/Import/Entities/EmployeeImporter.php:161
+#: includes/Import/Entities/EmployeeImporter.php:170
 #, php-format
 msgid "User %s already has a staff file; it was linked, not changed."
 msgstr ""
@@ -314,7 +314,7 @@ msgid "Same %2$s as guest %1$s already on file but another name (%3$s, not %4$s)
 msgstr ""
 
 #. translators: %d: number of guests.
-#: includes/Import/Entities/GuestImporter.php:268
+#: includes/Import/Entities/GuestImporter.php:270
 #, php-format
 msgid "%d guest used an e-mail address that several different people share in the old system; it is not kept."
 msgid_plural "%d guests used e-mail addresses that several different people share in the old system; they are not kept."
@@ -322,7 +322,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of guests.
-#: includes/Import/Entities/GuestImporter.php:279
+#: includes/Import/Entities/GuestImporter.php:281
 #, php-format
 msgid "%d guest had a placeholder e-mail in the old system; they are marked as having no e-mail."
 msgid_plural "%d guests had a placeholder e-mail in the old system; they are marked as having no e-mail."
@@ -330,7 +330,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: 1: number of guests, 2: number of accounts.
-#: includes/Import/Entities/GuestImporter.php:388
+#: includes/Import/Entities/GuestImporter.php:405
 #, php-format
 msgid "%1$d guest will be linked to their WordPress account (%2$d given the Hotel Guest role)."
 msgid_plural "%1$d guests will be linked to their WordPress accounts (%2$d given the Hotel Guest role)."
@@ -338,7 +338,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: 1: number of guests, 2: number of accounts.
-#: includes/Import/Entities/GuestImporter.php:390
+#: includes/Import/Entities/GuestImporter.php:407
 #, php-format
 msgid "%1$d guest was linked to their WordPress account (%2$d given the Hotel Guest role)."
 msgid_plural "%1$d guests were linked to their WordPress accounts (%2$d given the Hotel Guest role)."
@@ -346,42 +346,42 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of accounts.
-#: includes/Import/Entities/GuestImporter.php:402
+#: includes/Import/Entities/GuestImporter.php:419
 #, php-format
 msgid "%d account was not linked: its guest is linked to another account of the same person (a merged duplicate), or the account belongs to another guest."
 msgid_plural "%d accounts were not linked: their guest is linked to another account of the same person (a merged duplicate), or the account belongs to another guest."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/Import/Entities/GuestImporter.php:408
+#: includes/Import/Entities/GuestImporter.php:425
 msgid "The Hotel Guest role is missing: update Radius Hotel Booking and run the import again to give it to the linked accounts."
 msgstr ""
 
-#: includes/Import/Entities/GuestImporter.php:459
+#: includes/Import/Entities/GuestImporter.php:476
 msgid "Banned in the old system, but merged into a guest with another name; not banned here. Check by hand."
 msgstr ""
 
-#: includes/Import/Entities/GuestImporter.php:462
+#: includes/Import/Entities/GuestImporter.php:479
 msgid "Banned in the old system; the guest it was merged into is banned too."
 msgstr ""
 
-#: includes/Import/Entities/GuestImporter.php:518
+#: includes/Import/Entities/GuestImporter.php:535
 msgid "The customer has no name."
 msgstr ""
 
 #. translators: %s: phone number as stored.
-#: includes/Import/Entities/GuestImporter.php:522
+#: includes/Import/Entities/GuestImporter.php:539
 #, php-format
 msgid "The phone number \"%s\" cannot be read."
 msgstr ""
 
 #. translators: %s: e-mail as stored.
-#: includes/Import/Entities/GuestImporter.php:526
+#: includes/Import/Entities/GuestImporter.php:543
 #, php-format
 msgid "The e-mail \"%s\" is not valid."
 msgstr ""
 
-#: includes/Import/Entities/GuestImporter.php:529
+#: includes/Import/Entities/GuestImporter.php:546
 msgid "The customer has neither a phone number nor an e-mail."
 msgstr ""
 
@@ -399,12 +399,12 @@ msgstr ""
 msgid "(Old system, %s)"
 msgstr ""
 
-#: includes/Import/Entities/LegacyLogExport.php:42
+#: includes/Import/Entities/LegacyLogExport.php:52
 msgid "Old activity log (kept as a file)"
 msgstr ""
 
 #. translators: %d: number of rows.
-#: includes/Import/Entities/LegacyLogExport.php:86
+#: includes/Import/Entities/LegacyLogExport.php:108
 #, php-format
 msgid "%d old log entry will be kept as a CSV file."
 msgid_plural "%d old log entries will be kept as a CSV file."
@@ -412,7 +412,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: 1: number of rows, 2: download link.
-#: includes/Import/Entities/LegacyLogExport.php:114
+#: includes/Import/Entities/LegacyLogExport.php:138
 #, php-format
 msgid "%1$d old log entry kept as a file; keep it with the cutover backup: %2$s"
 msgid_plural "%1$d old log entries kept as a file; keep it with the cutover backup: %2$s"
@@ -457,6 +457,20 @@ msgstr ""
 #: includes/Import/Entities/PayrollHistoryImporter.php:538
 #, php-format
 msgid "%1$s of %2$s: %3$s in the old system, %4$s from the imported pay runs. Balances are derived here; check the history."
+msgstr ""
+
+#: includes/Import/Entities/PayrollSettingsImporter.php:41
+msgid "Payroll tax settings"
+msgstr ""
+
+#. translators: 1: the old rate, 2: the rate imported.
+#: includes/Import/Entities/PayrollSettingsImporter.php:67
+#, php-format
+msgid "The old work accident rate %1$s %% is outside 2 to 5 %%; %2$s %% was used. Check it under Settings → Payroll → Social contributions."
+msgstr ""
+
+#: includes/Import/Entities/PayrollSettingsImporter.php:94
+msgid "Social contributions are already set up here; they were kept, not replaced."
 msgstr ""
 
 #: includes/Import/Entities/PayScheduleImporter.php:37
@@ -748,7 +762,7 @@ msgid "Set the legacy import source to the tables starting with %s"
 msgstr ""
 
 #: includes/Import/LegacyImporter.php:115
-#: includes/Plugin.php:230
+#: includes/Plugin.php:247
 msgid "Ran the legacy data import"
 msgstr ""
 
@@ -834,45 +848,133 @@ msgid_plural "%d children"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/Payroll/IvorianCalculator.php:47
+#: includes/Payroll/IvorianCalculator.php:57
 msgid "Côte d'Ivoire (CNPS, IS, CN, IGR)"
 msgstr ""
 
-#: includes/Payroll/IvorianPayroll.php:126
+#: includes/Payroll/IvorianPayroll.php:107
 msgid "Côte d'Ivoire payroll settings"
 msgstr ""
 
-#: includes/Payroll/StatutoryTable.php:133
-#: includes/Payroll/StatutoryTable.php:161
-msgid "Retirement fund"
+#: includes/Payroll/SeniorityBonus.php:76
+msgid "Seniority bonus"
 msgstr ""
 
-#: includes/Payroll/StatutoryTable.php:140
-msgid "Salary tax (IS)"
+#: includes/Payroll/SeniorityBonus.php:100
+msgid "Seniority bonus (1 % per year since hiring, max 25 %)"
 msgstr ""
 
-#: includes/Payroll/StatutoryTable.php:147
-msgid "National contribution (CN)"
+#. translators: 1: bonus name, 2: percentage, 3: years of service.
+#: includes/Payroll/SeniorityBonus.php:126
+#, php-format
+msgid "%1$s (%2$d %%, %3$d years)"
 msgstr ""
 
-#: includes/Payroll/StatutoryTable.php:154
-msgid "General income tax (IGR)"
+#: includes/Payroll/StatutorySettings.php:53
+msgid "Retirement fund (employee)"
 msgstr ""
 
-#: includes/Payroll/StatutoryTable.php:168
+#: includes/Payroll/StatutorySettings.php:61
+msgid "Retirement fund (hotel)"
+msgstr ""
+
+#: includes/Payroll/StatutorySettings.php:69
+#: includes/Payroll/StatutoryTable.php:257
 msgid "Family benefits"
 msgstr ""
 
-#: includes/Payroll/StatutoryTable.php:175
+#: includes/Payroll/StatutorySettings.php:77
+#: includes/Payroll/StatutoryTable.php:264
 msgid "Work accident / disability insurance"
 msgstr ""
 
-#: includes/Plugin.php:85
+#: includes/Payroll/StatutorySettings.php:286
+msgid "The work accident / disability rate must be between 2 and 5 %."
+msgstr ""
+
+#: includes/Payroll/StatutorySettings.php:303
+msgid "Keep at least one bracket in each scale."
+msgstr ""
+
+#: includes/Payroll/StatutoryTable.php:222
+#: includes/Payroll/StatutoryTable.php:250
+msgid "Retirement fund"
+msgstr ""
+
+#: includes/Payroll/StatutoryTable.php:229
+#: src/admin/payroll/IvorianPayrollSection.jsx:154
+#: src/admin/payroll/TaxInfoTab.jsx:281
+msgid "Salary tax (IS)"
+msgstr ""
+
+#: includes/Payroll/StatutoryTable.php:236
+#: src/admin/payroll/IvorianPayrollSection.jsx:178
+#: src/admin/payroll/TaxInfoTab.jsx:317
+msgid "National contribution (CN)"
+msgstr ""
+
+#: includes/Payroll/StatutoryTable.php:243
+#: src/admin/payroll/IvorianPayrollSection.jsx:199
+#: src/admin/payroll/TaxInfoTab.jsx:333
+msgid "General income tax (IGR)"
+msgstr ""
+
+#: includes/Payroll/WorkPremiumDefaults.php:59
+msgid "New Year’s Day"
+msgstr ""
+
+#: includes/Payroll/WorkPremiumDefaults.php:60
+msgid "Labour Day"
+msgstr ""
+
+#: includes/Payroll/WorkPremiumDefaults.php:61
+msgid "Independence Day"
+msgstr ""
+
+#: includes/Payroll/WorkPremiumDefaults.php:62
+msgid "Assumption Day"
+msgstr ""
+
+#: includes/Payroll/WorkPremiumDefaults.php:63
+msgid "All Saints’ Day"
+msgstr ""
+
+#: includes/Payroll/WorkPremiumDefaults.php:64
+msgid "National Peace Day"
+msgstr ""
+
+#: includes/Payroll/WorkPremiumDefaults.php:65
+msgid "Christmas Day"
+msgstr ""
+
+#: includes/Plugin.php:89
 msgid "Radius Hotel Booking - Residence TATA needs Radius Hotel Booking and Radius Hotel Booking Pro to be installed and active."
 msgstr ""
 
-#: includes/Plugin.php:234
+#: includes/Plugin.php:251
 msgid "Changed the legacy import source"
+msgstr ""
+
+#: includes/Settings/CnpsLabels.php:41
+#: includes/Settings/CnpsLabels.php:59
+#: src/admin/index.js:21
+msgid "CNPS number"
+msgstr ""
+
+#. translators: %s: the hotel's CNPS employer number.
+#: includes/Settings/CnpsLabels.php:44
+#, php-format
+msgid "CNPS no. %s"
+msgstr ""
+
+#. translators: %s: a CNPS number.
+#: includes/Settings/CnpsLabels.php:62
+#, php-format
+msgid "CNPS %s"
+msgstr ""
+
+#: includes/Settings/DashboardLinks.php:50
+msgid "Hotel Dashboard"
 msgstr ""
 
 #. translators: 1: the site's current time zone, 2: Africa/Abidjan.
@@ -886,12 +988,17 @@ msgid "Set the time zone to Abidjan"
 msgstr ""
 
 #. translators: Keep the {…} merge tags as they are.
-#: includes/Settings/LocalDefaults.php:75
+#: includes/Settings/LocalDefaults.php:164
 msgid "Send {amount} by Wave before {deadline}, with {reference} as the message."
 msgstr ""
 
+#: includes/Settings/LocalDefaults.php:168
+#: includes/Settings/LocalDefaults.php:180
+msgid "Transaction ID"
+msgstr ""
+
 #. translators: Keep the {…} merge tags as they are.
-#: includes/Settings/LocalDefaults.php:83
+#: includes/Settings/LocalDefaults.php:176
 msgid "Send {amount} by Orange Money before {deadline}, with {reference} as the message."
 msgstr ""
 
@@ -988,6 +1095,7 @@ msgid "The import could not be loaded"
 msgstr ""
 
 #: src/admin/import/ImportScreen.jsx:310
+#: src/admin/payroll/TaxInfoTab.jsx:163
 msgid "Try again"
 msgstr ""
 
@@ -1076,34 +1184,233 @@ msgstr ""
 msgid "Everything the dry run counted is written into the new system. Running it again later updates what changed and creates no duplicates."
 msgstr ""
 
-#: src/admin/index.js:26
+#: src/admin/index.js:24
+msgid "Your employer number with the CNPS, printed on invoices and payslips."
+msgstr ""
+
+#: src/admin/index.js:50
 msgid "Data import"
 msgstr ""
 
-#: src/admin/index.js:30
+#: src/admin/index.js:54
 msgid "Bring the data across from the old hotel plugins"
 msgstr ""
 
-#: src/admin/index.js:53
+#: src/admin/index.js:78
 msgid "Côte d’Ivoire payroll"
 msgstr ""
 
-#: src/admin/index.js:57
-msgid "Work accident rate for CNPS"
+#: src/admin/index.js:82
+msgid "IS, CN and IGR rates and scales"
 msgstr ""
 
-#: src/admin/payroll/IvorianPayrollSection.jsx:28
-msgid "Statutory contributions"
+#: src/admin/index.js:104
+msgid "Tax info"
 msgstr ""
 
-#: src/admin/payroll/IvorianPayrollSection.jsx:32
-msgid "CNPS and DGI rates and caps follow the law and are built in. Only the work accident rate is your own: CNPS sets it for your business."
+#: src/admin/index.js:151
+msgid "Food Order and Inventory"
 msgstr ""
 
-#: src/admin/payroll/IvorianPayrollSection.jsx:38
-msgid "Work accident / disability insurance rate"
+#: src/admin/payroll/IvorianPayrollSection.jsx:30
+#: src/admin/payroll/IvorianPayrollSection.jsx:48
+msgid "How the scale applies"
 msgstr ""
 
-#: src/admin/payroll/IvorianPayrollSection.jsx:42
-msgid "Paid by the hotel on each salary, up to 70,000 CFA a month. Between 2 and 5 %."
+#: src/admin/payroll/IvorianPayrollSection.jsx:36
+msgid "Each slice of the base is taxed at its bracket’s rate."
+msgstr ""
+
+#: src/admin/payroll/IvorianPayrollSection.jsx:40
+msgid "The rate of the bracket the base falls in applies to all of it (as the old system did)."
+msgstr ""
+
+#: src/admin/payroll/IvorianPayrollSection.jsx:57
+msgid "One rate on the whole base"
+msgstr ""
+
+#: src/admin/payroll/IvorianPayrollSection.jsx:64
+msgid "Each slice at its rate"
+msgstr ""
+
+#: src/admin/payroll/IvorianPayrollSection.jsx:90
+msgid "Update Radius Hotel Booking Pro to edit this scale."
+msgstr ""
+
+#: src/admin/payroll/IvorianPayrollSection.jsx:131
+msgid "Taxable pay"
+msgstr ""
+
+#: src/admin/payroll/IvorianPayrollSection.jsx:135
+msgid "IS, CN and IGR are worked out on this share of monthly pay, after the employee’s social contributions. The CNPS contributions (retirement, family benefits, work accident) are set in Settings → Payroll → Social contributions."
+msgstr ""
+
+#: src/admin/payroll/IvorianPayrollSection.jsx:143
+#: src/admin/payroll/TaxInfoTab.jsx:291
+msgid "Taxable share of pay"
+msgstr ""
+
+#: src/admin/payroll/IvorianPayrollSection.jsx:147
+msgid "80 %: pay less the employee’s contributions, times 80 %."
+msgstr ""
+
+#: src/admin/payroll/IvorianPayrollSection.jsx:158
+msgid "Of the taxable pay. Paid to the DGI."
+msgstr ""
+
+#: src/admin/payroll/IvorianPayrollSection.jsx:169
+msgid "Edit the CNPS contributions →"
+msgstr ""
+
+#: src/admin/payroll/IvorianPayrollSection.jsx:182
+msgid "By monthly brackets of the taxable pay."
+msgstr ""
+
+#: src/admin/payroll/IvorianPayrollSection.jsx:203
+msgid "On a share of what is left of the taxable pay after IS and CN, by monthly brackets."
+msgstr ""
+
+#: src/admin/payroll/IvorianPayrollSection.jsx:211
+#: src/admin/payroll/TaxInfoTab.jsx:340
+msgid "IGR base"
+msgstr ""
+
+#: src/admin/payroll/IvorianPayrollSection.jsx:212
+msgid "85 %: taxable pay less IS and CN, times 85 %."
+msgstr ""
+
+#: src/admin/payroll/IvorianPayrollSection.jsx:223
+#: src/admin/payroll/TaxInfoTab.jsx:352
+msgid "Family quotient"
+msgstr ""
+
+#: src/admin/payroll/IvorianPayrollSection.jsx:227
+msgid "Divide the base by the employee’s family parts before the scale, then multiply back. The old system did not."
+msgstr ""
+
+#. translators: %s: a percentage number, e.g. 6.3.
+#: src/admin/payroll/TaxInfoTab.jsx:22
+#, js-format
+msgid "%s %%"
+msgstr ""
+
+#: src/admin/payroll/TaxInfoTab.jsx:34
+msgid "Each slice of the base at its rate"
+msgstr ""
+
+#: src/admin/payroll/TaxInfoTab.jsx:38
+msgid "The rate of the bracket the base falls in, on the whole base"
+msgstr ""
+
+#: src/admin/payroll/TaxInfoTab.jsx:91
+msgid "Monthly taxable pay"
+msgstr ""
+
+#: src/admin/payroll/TaxInfoTab.jsx:99
+msgid "Above"
+msgstr ""
+
+#: src/admin/payroll/TaxInfoTab.jsx:115
+msgid "Rate"
+msgstr ""
+
+#: src/admin/payroll/TaxInfoTab.jsx:125
+msgid "No brackets set."
+msgstr ""
+
+#: src/admin/payroll/TaxInfoTab.jsx:153
+msgid "The tax information could not be loaded."
+msgstr ""
+
+#: src/admin/payroll/TaxInfoTab.jsx:172
+msgid "Hotel"
+msgstr ""
+
+#: src/admin/payroll/TaxInfoTab.jsx:173
+msgid "Employee"
+msgstr ""
+
+#: src/admin/payroll/TaxInfoTab.jsx:178
+msgid "The rates every pay run uses today. Read only: change them in Settings → Payroll (social contributions) and Settings → Côte d’Ivoire payroll (taxes). A past payslip keeps the figures it was worked out with."
+msgstr ""
+
+#: src/admin/payroll/TaxInfoTab.jsx:185
+#: src/admin/payroll/TaxInfoTab.jsx:265
+msgid "Social contributions"
+msgstr ""
+
+#: src/admin/payroll/TaxInfoTab.jsx:189
+msgid "A percentage of pay up to a monthly ceiling, or a fixed amount per month (CMU). The employee’s share is taken from pay; the hotel’s is added to its cost."
+msgstr ""
+
+#: src/admin/payroll/TaxInfoTab.jsx:198
+msgid "Contribution"
+msgstr ""
+
+#: src/admin/payroll/TaxInfoTab.jsx:211
+msgid "Paid by"
+msgstr ""
+
+#: src/admin/payroll/TaxInfoTab.jsx:219
+msgid "Paid to"
+msgstr ""
+
+#: src/admin/payroll/TaxInfoTab.jsx:227
+msgid "Rate or amount"
+msgstr ""
+
+#: src/admin/payroll/TaxInfoTab.jsx:241
+msgid "Monthly ceiling"
+msgstr ""
+
+#: src/admin/payroll/TaxInfoTab.jsx:248
+msgid "Per month"
+msgstr ""
+
+#: src/admin/payroll/TaxInfoTab.jsx:253
+msgid "No ceiling"
+msgstr ""
+
+#: src/admin/payroll/TaxInfoTab.jsx:271
+msgid "No social contributions set."
+msgstr ""
+
+#: src/admin/payroll/TaxInfoTab.jsx:285
+msgid "Paid to the DGI by the employee."
+msgstr ""
+
+#: src/admin/payroll/TaxInfoTab.jsx:295
+msgid "Pay less the employee’s contributions, times this share. IS, CN and IGR are worked out on it."
+msgstr ""
+
+#: src/admin/payroll/TaxInfoTab.jsx:303
+msgid "Salary tax rate"
+msgstr ""
+
+#: src/admin/payroll/TaxInfoTab.jsx:307
+msgid "Of the taxable pay."
+msgstr ""
+
+#: src/admin/payroll/TaxInfoTab.jsx:325
+msgid "National contribution scale"
+msgstr ""
+
+#: src/admin/payroll/TaxInfoTab.jsx:344
+msgid "Taxable pay less IS and CN, times this share."
+msgstr ""
+
+#: src/admin/payroll/TaxInfoTab.jsx:356
+msgid "The base divided by the employee’s family parts before the scale."
+msgstr ""
+
+#: src/admin/payroll/TaxInfoTab.jsx:362
+msgid "On"
+msgstr ""
+
+#: src/admin/payroll/TaxInfoTab.jsx:363
+msgid "Off"
+msgstr ""
+
+#: src/admin/payroll/TaxInfoTab.jsx:368
+msgid "General income tax scale"
 msgstr ""

@@ -183,11 +183,11 @@ export default function TaxInfoTab() {
 
 			<Panel
 				title={ __(
-					'Social contributions (CNPS)',
+					'Social contributions',
 					'radius-hotel-booking-residencetata'
 				) }
 				description={ __(
-					'A percentage of pay, up to a monthly ceiling. The employee’s share is taken from pay; the hotel’s is added to its cost.',
+					'A percentage of pay up to a monthly ceiling, or a fixed amount per month (CMU). The employee’s share is taken from pay; the hotel’s is added to its cost.',
 					'radius-hotel-booking-residencetata'
 				) }
 			>
@@ -225,10 +225,16 @@ export default function TaxInfoTab() {
 						{
 							id: 'rate',
 							header: __(
-								'Rate',
+								'Rate or amount',
 								'radius-hotel-booking-residencetata'
 							),
-							cell: ( row ) => percent( row.rate ),
+							cell: ( row ) =>
+								null !== row.amount &&
+								undefined !== row.amount ? (
+									<Money value={ row.amount } />
+								) : (
+									percent( row.rate )
+								),
 						},
 						{
 							id: 'cap',
@@ -237,7 +243,13 @@ export default function TaxInfoTab() {
 								'radius-hotel-booking-residencetata'
 							),
 							cell: ( row ) =>
-								null === row.cap ? (
+								null !== row.amount &&
+								undefined !== row.amount ? (
+									__(
+										'Per month',
+										'radius-hotel-booking-residencetata'
+									)
+								) : null === row.cap ? (
 									__(
 										'No ceiling',
 										'radius-hotel-booking-residencetata'

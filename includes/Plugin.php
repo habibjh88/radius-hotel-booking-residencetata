@@ -114,6 +114,8 @@ final class Plugin {
 		\RadiusTheme\RadiusHotelBookingTata\Staff\StaffNames::register();
 		// The hotel and Food Menu dashboards link to each other (R1-T18).
 		\RadiusTheme\RadiusHotelBookingTata\Settings\DashboardLinks::register();
+		// "Social security" reads "CNPS" on the settings, invoices, payslips and staff files.
+		\RadiusTheme\RadiusHotelBookingTata\Settings\CnpsLabels::register();
 		if ( class_exists( '\\RadiusTheme\\RadiusHotelBooking\\Settings\\SettingsSchema' ) ) {
 			// The schema may have been read before this add-on booted.
 			\RadiusTheme\RadiusHotelBooking\Settings\SettingsSchema::flush();

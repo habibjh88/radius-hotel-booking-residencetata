@@ -12,6 +12,30 @@ import { __ } from '@wordpress/i18n';
 import { Banknote, DatabaseZap, UtensilsCrossed } from 'lucide-react';
 
 /*
+ * "Social security" reads "CNPS" on the dashboard (Settings → General, the
+ * staff file), as CnpsLabels does for the PHP strings. Free and Pro keep
+ * their generic wording; these filters only rename it here.
+ */
+const CNPS_LABELS = {
+	'Social security number': () =>
+		__( 'CNPS number', 'radius-hotel-booking-residencetata' ),
+	'Your employer registration with the social security office, printed on invoices and payslips.':
+		() =>
+			__(
+				'Your employer number with the CNPS, printed on invoices and payslips.',
+				'radius-hotel-booking-residencetata'
+			),
+};
+[ 'radius-hotel-booking', 'radius-hotel-booking-pro' ].forEach( ( domain ) =>
+	addFilter(
+		`i18n.gettext_${ domain }`,
+		'radius-hotel-booking-residencetata/cnps',
+		( translation, text ) =>
+			CNPS_LABELS[ text ] ? CNPS_LABELS[ text ]() : translation
+	)
+);
+
+/*
  * M18: the legacy data import, administrators only (the server checks too).
  */
 if ( window.rtbp_tata?.can_import ) {

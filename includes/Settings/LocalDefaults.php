@@ -128,6 +128,17 @@ final class LocalDefaults {
 			// The work accident rate stays within the 2–5 % the law allows (CNPS).
 			$sections['payroll']['contributions']['sanitize'] = \RadiusTheme\RadiusHotelBookingTata\Payroll\StatutorySettings::guardContributions( $sections['payroll']['contributions']['sanitize'] ?? null );
 		}
+		// Night, Sunday and holiday work paid, with the fixed-date public holidays (Pro's payroll settings).
+		if ( isset( $sections['payroll']['premiums'] ) ) {
+			$sections['payroll']['premiums']['default'] = array( \RadiusTheme\RadiusHotelBookingTata\Payroll\WorkPremiumDefaults::class, 'premiums' );
+		}
+		if ( isset( $sections['payroll']['holidays'] ) ) {
+			$sections['payroll']['holidays']['default'] = array( \RadiusTheme\RadiusHotelBookingTata\Payroll\WorkPremiumDefaults::class, 'holidays' );
+		}
+		// The desk sells a slot that has already started (a walk-in at 14:00 takes the Half Day), as the old system.
+		if ( isset( $sections['booking']['deskStartedSlots'] ) ) {
+			$sections['booking']['deskStartedSlots']['default'] = true;
+		}
 		// Pro's cash register (R3-T7): the desk opens it before taking any payment.
 		if ( isset( $sections['pro_cash_register']['requireOpen'] ) ) {
 			$sections['pro_cash_register']['requireOpen']['default'] = true;

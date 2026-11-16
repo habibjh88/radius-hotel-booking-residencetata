@@ -74,6 +74,8 @@ class TaxInfoController {
 					'side'      => 'employer' === ( $row['side'] ?? '' ) ? 'employer' : 'employee',
 					'rate'      => (float) ( $row['rate'] ?? 0 ),
 					'cap'       => (float) ( $row['cap'] ?? 0 ) > 0 ? (float) $row['cap'] : null,
+					// A fixed amount per month (e.g. CMU) instead of a rate; null for a rate.
+					'amount'    => 'amount' === ( $row['type'] ?? '' ) ? (float) ( $row['amount'] ?? 0 ) : null,
 				),
 				StatutorySettings::contributionRows()
 			),

@@ -103,3 +103,8 @@ Import fills Social contributions with the old CNPS rates and work accident rate
 Settings refuse a work accident rate outside 2–5 % and an empty CN or IGR scale.
 New read-only Tax info tab on Payroll: CNPS contributions, IS, CN and IGR rates.
 New sites now start in FCFA (XOF, 15 000 CFA) instead of US dollars.
+Payroll takes fixed-amount contributions such as CMU; Tax info shows their monthly amount.
+The front desk can sell a slot already started (walk-ins), as in the old system.
+"Social security number" reads "CNPS number" in settings, invoices, payslips and staff files.
+French translation completed for every add-on screen.
+Night, Sunday and holiday work start at Ivorian rates, with fixed-date public holidays listed.
